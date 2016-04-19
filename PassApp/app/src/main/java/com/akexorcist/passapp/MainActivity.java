@@ -1,8 +1,7 @@
 package com.akexorcist.passapp;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -12,8 +11,8 @@ import com.samsung.android.sdk.pass.Spass;
 import com.samsung.android.sdk.pass.SpassFingerprint;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    private SpassFingerprint mSpassFingerprint;
-    private Spass mSpass;
+    private SpassFingerprint spassFingerprint;
+    private Spass spass;
 
     private Button btnVerify;
 
@@ -33,17 +32,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private boolean setupSPass() {
-        mSpass = new Spass();
+        spass = new Spass();
         try {
-            mSpass.initialize(this);
-            if (mSpass.isFeatureEnabled(Spass.DEVICE_FINGERPRINT)) {
-                mSpassFingerprint = new SpassFingerprint(this);
+            spass.initialize(this);
+            if (spass.isFeatureEnabled(Spass.DEVICE_FINGERPRINT)) {
+                spassFingerprint = new SpassFingerprint(this);
                 return true;
             }
-        } catch (SsdkUnsupportedException e) {
+        } catch (SsdkUnsupportedException | UnsupportedOperationException e) {
             // Fingerprint Service is not supported in this SDK
-        } catch (UnsupportedOperationException e) {
-            // Fingerprint Service is not supported in this device
         }
         return false;
     }
@@ -56,8 +53,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void startIdentifyDialog(boolean backup) {
-        if (mSpassFingerprint != null) {
-            mSpassFingerprint.startIdentifyWithDialog(this, mIdentifyListenerDialog, backup);
+        if (spassFingerprint != null) {
+            spassFingerprint.startIdentifyWithDialog(this, mIdentifyListenerDialog, backup);
         }
     }
 
@@ -65,22 +62,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         @Override
         public void onFinished(int eventStatus) {
             Toast.makeText(MainActivity.this, getEventStatusName(eventStatus), Toast.LENGTH_SHORT).show();
-
             if (eventStatus == SpassFingerprint.STATUS_AUTHENTIFICATION_SUCCESS) {
-                // Authentification Success
-                int index = mSpassFingerprint.getIdentifiedFingerprintIndex();
+                // Authentication Success
+                int index = spassFingerprint.getIdentifiedFingerprintIndex();
                 Toast.makeText(MainActivity.this, "Fingerprint Index : " + index, Toast.LENGTH_SHORT).show();
             } else if (eventStatus == SpassFingerprint.STATUS_AUTHENTIFICATION_PASSWORD_SUCCESS) {
-                // Authentification Password Success
+                // Authentication Password Success
             } else if (eventStatus == SpassFingerprint.STATUS_USER_CANCELLED
                     || eventStatus == SpassFingerprint.STATUS_USER_CANCELLED_BY_TOUCH_OUTSIDE) {
-                // Authentification Cancel
+                // Authentication Cancel
             } else if (eventStatus == SpassFingerprint.STATUS_TIMEOUT_FAILED) {
-                // Authentification Timeout
+                // Authentication Timeout
             } else if (eventStatus == SpassFingerprint.STATUS_QUALITY_FAILED) {
-                // Authentification Quality Failed
+                // Authentication Quality Failed
             } else {
-                // Authentification Failed
+                // Authentication Failed
             }
         }
 

@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Image Filter App</string>
+    <string name="image_original">Original</string>
+    <string name="image_sepia">Sepia</string>
+    <string name="image_vintage">Vintage</string>
+    <string name="image_pastel_sketch">Pastel Sketch</string>
+    <string name="image_size" formatted="false">Size : %d x %d px</string>
+    <string name="convert_time" formatted="false">Convert Time : %d ms</string>
+</resources>

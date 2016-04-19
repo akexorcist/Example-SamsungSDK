@@ -5,7 +5,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
@@ -73,20 +72,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void setupDrawingWorkspace() {
-        spenSimpleSurfaceView = new SpenSimpleSurfaceView(this);
-        layoutDrawingWorkspace.addView(spenSimpleSurfaceView);
-        layoutDrawingWorkspace.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @Override
-            public void onGlobalLayout() {
-                layoutDrawingWorkspace.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                setupWorkspace();
-            }
-        });
-    }
-
-    private void setupWorkspace() {
         try {
-            spenNoteDoc = new SpenNoteDoc(this, 3000, 3000);
+            spenSimpleSurfaceView = new SpenSimpleSurfaceView(this);
+            spenSimpleSurfaceView.setBlankColor(Color.GRAY);
+            layoutDrawingWorkspace.addView(spenSimpleSurfaceView);
+            spenNoteDoc = new SpenNoteDoc(this, 1000, 1000);
             SpenPageDoc spenPageDoc = spenNoteDoc.appendPage();
             spenPageDoc.setBackgroundColor(Color.WHITE);
             spenPageDoc.clearHistory();

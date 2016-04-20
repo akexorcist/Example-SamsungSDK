@@ -10,7 +10,7 @@ public interface ActivationCallback {
 
     void onLicenseActivated();
 
-    void onLicenseActivateFailed();
+    void onLicenseActivateFailed(int errorType, String errorMessage);
 
     void onLicenseDeactivated();
 }

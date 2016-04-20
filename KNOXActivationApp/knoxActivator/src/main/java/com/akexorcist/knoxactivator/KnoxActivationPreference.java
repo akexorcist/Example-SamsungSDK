@@ -35,8 +35,16 @@ public class KnoxActivationPreference {
         getEditor(context).putBoolean(KEY_DEVICE_ADMIN_STATE, state).apply();
     }
 
+    public void setLicenseActivate(Context context, boolean state) {
+        getEditor(context).putBoolean(KEY_LICENSE_STATE, state).apply();
+    }
+
     public boolean getDeviceAdminActivationState(Context context) {
         return getPreference(context).getBoolean(KEY_DEVICE_ADMIN_STATE, false);
+    }
+
+    public boolean getLicenseActivationState(Context context) {
+        return getPreference(context).getBoolean(KEY_LICENSE_STATE, false);
     }
 
     public void setSharedPreferenceChangeListener(Context context, SharedPreferences.OnSharedPreferenceChangeListener listener) {

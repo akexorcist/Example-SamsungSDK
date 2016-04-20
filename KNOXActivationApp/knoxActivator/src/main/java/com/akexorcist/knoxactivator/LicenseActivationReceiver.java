@@ -23,43 +23,51 @@
 
 package com.akexorcist.knoxactivator;
 
+import android.app.enterprise.license.EnterpriseLicenseManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Handler;
 
-//This BroadcastReceiver handles ELM activation
+import com.akexorcist.knoxactivator.event.LicenseActivatedEvent;
+import com.akexorcist.knoxactivator.event.LicenseActivationFailedEvent;
 
 public class LicenseActivationReceiver extends BroadcastReceiver {
+    private static final long EVENT_LISTENER_DELAY = 500;
+
     public LicenseActivationReceiver() {
     }
 
     @Override
     public void onReceive(Context context, Intent intent) {
-
+        if (intent != null) {
+            String action = intent.getAction();
+            if (action != null && action.equals(EnterpriseLicenseManager.ACTION_LICENSE_STATUS)) {
+                int errorCode = intent.getIntExtra(EnterpriseLicenseManager.EXTRA_LICENSE_ERROR_CODE, EnterpriseLicenseManager.ERROR_UNKNOWN);
+                if (errorCode == EnterpriseLicenseManager.ERROR_NONE) {
+                    onLicenseActivated();
+                } else {
+                    onLicenseActivationFailed(errorCode);
+                }
+            }
+        }
     }
 
-    //    @Override
-//    public void onReceive(Context context, Intent intent) {
-//        if (intent != null) {
-//            String action = intent.getAction();
-//            if (action != null && action.equals(EnterpriseLicenseManager.ACTION_LICENSE_STATUS)) {
-//
-//                int errorCode = intent.getIntExtra(EnterpriseLicenseManager.EXTRA_LICENSE_ERROR_CODE, MyConstant.DEFAULT_ERROR);
-//
-//                if (errorCode == EnterpriseLicenseManager.ERROR_NONE) {
-//                    saveState(context, MyConstant.RESULT_ELM_ACTIVATED);
-////                    EventBus.getInstance().post(new LicenseStateEvent().setSuccess(MyConstant.RESULT_ELM_ACTIVATED));
-//                } else {
-//                    //If license activation failed
-////                    EventBus.getInstance().post(new LicenseStateEvent().setError(errorCode));
-//                }
-//            }
-//        }
-//    }
-//
-//    public void saveState(Context context, int condition) {
-//        if (condition == MyConstant.RESULT_ELM_ACTIVATED) {
-//            MyUtil.setELMDevice(context, true);
-//        }
-//    }
+    private void onLicenseActivated() {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                KnoxActivationBus.getInstance().getBus().post(new LicenseActivatedEvent());
+            }
+        }, EVENT_LISTENER_DELAY);
+    }
+
+    private void onLicenseActivationFailed(final int errorCode) {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                KnoxActivationBus.getInstance().getBus().post(new LicenseActivationFailedEvent(errorCode));
+            }
+        }, EVENT_LISTENER_DELAY);
+    }
 }

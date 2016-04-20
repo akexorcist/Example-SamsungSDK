@@ -26,13 +26,24 @@ package com.akexorcist.knoxactivator;
 import android.app.admin.DeviceAdminReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Handler;
+
+import com.akexorcist.knoxactivator.event.AdminActivatedEvent;
+import com.akexorcist.knoxactivator.event.AdminDeactivatedEvent;
 
 //This BroadcastReceiver handles device admin activation and deactivation
 
 public class AdminActivationReceiver extends DeviceAdminReceiver {
+    private static final long EVENT_LISTENER_DELAY = 500;
+
     @Override
     public void onEnabled(Context context, Intent intent) {
-        KnoxActivationPreference.getInstance().setDeviceAdminActivate(context, true);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                KnoxActivationBus.getInstance().getBus().post(new AdminActivatedEvent());
+            }
+        }, EVENT_LISTENER_DELAY);
     }
 
     @Override
@@ -42,6 +53,11 @@ public class AdminActivationReceiver extends DeviceAdminReceiver {
 
     @Override
     public void onDisabled(Context context, Intent intent) {
-        KnoxActivationPreference.getInstance().setDeviceAdminActivate(context, false);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                KnoxActivationBus.getInstance().getBus().post(new AdminDeactivatedEvent());
+            }
+        }, EVENT_LISTENER_DELAY);
     }
 }

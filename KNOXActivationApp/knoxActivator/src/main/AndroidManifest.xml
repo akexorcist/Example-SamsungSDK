@@ -24,12 +24,6 @@
             </intent-filter>
         </receiver>
 
-        <receiver android:name=".SimpleBroadcastReceiver">
-            <intent-filter>
-                <action android:name="android.intent.action.HEADSET_PLUG" />
-            </intent-filter>
-        </receiver>
-
     </application>
 
 </manifest>

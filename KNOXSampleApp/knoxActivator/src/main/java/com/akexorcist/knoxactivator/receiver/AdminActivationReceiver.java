@@ -35,7 +35,7 @@ import com.akexorcist.knoxactivator.event.AdminDeactivatedEvent;
 //This BroadcastReceiver handles device admin activation and deactivation
 
 public class AdminActivationReceiver extends DeviceAdminReceiver {
-    private static final long EVENT_LISTENER_DELAY = 800;
+    private static final long EVENT_LISTENER_DELAY = 500;
 
     @Override
     public void onEnabled(Context context, Intent intent) {

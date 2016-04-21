@@ -34,7 +34,7 @@ import com.akexorcist.knoxactivator.event.LicenseActivatedEvent;
 import com.akexorcist.knoxactivator.event.LicenseActivationFailedEvent;
 
 public class LicenseActivationReceiver extends BroadcastReceiver {
-    private static final long EVENT_LISTENER_DELAY = 1500;
+    private static final long EVENT_LISTENER_DELAY = 500;
 
     public LicenseActivationReceiver() {
     }

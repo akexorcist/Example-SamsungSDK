@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.akexorcist.knoxactivator.ActivationCallback;
 import com.akexorcist.knoxactivator.KnoxActivationManager;
@@ -61,22 +62,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         } else if (v == btnLicense) {
             KnoxActivationManager.getInstance().activateLicense(this, LICENSE_KEY);
         } else if (v == btnLockDeviceAdmin) {
-            lockDeviceAdmin(true);
+            lockDeviceAdmin();
         } else if (v == btnUnlockDeviceAdmin) {
-            lockDeviceAdmin(false);
+            unlockDeviceAdmin();
         }
     }
 
     @Override
     public void onDeviceAdminActivated() {
         Log.e("Check", "onDeviceAdminActivated");
-//        btnActivateDeviceAdmin.setEnabled(false);
     }
 
     @Override
     public void onDeviceAdminDeactivated() {
         Log.e("Check", "onDeviceAdminDeactivated");
-//        btnActivateDeviceAdmin.setEnabled(true);
     }
 
     @Override
@@ -95,8 +94,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Log.e("Check", "onLicenseDeactivated");
     }
 
-    public void lockDeviceAdmin(boolean state) {
-        EnterpriseDeviceManager enterpriseDeviceManager = (EnterpriseDeviceManager) getSystemService(EnterpriseDeviceManager.ENTERPRISE_POLICY_SERVICE);
-        enterpriseDeviceManager.setAdminRemovable(state);
+    public void lockDeviceAdmin() {
+        setAdminRemovable(false);
+    }
+
+    public void unlockDeviceAdmin() {
+        setAdminRemovable(true);
+    }
+
+    @SuppressWarnings("WrongConstant")
+    public void setAdminRemovable(boolean state) {
+        if (KnoxActivationManager.getInstance().isDeviceAdminActivated(this)) {
+            EnterpriseDeviceManager enterpriseDeviceManager = (EnterpriseDeviceManager) getSystemService(EnterpriseDeviceManager.ENTERPRISE_POLICY_SERVICE);
+            enterpriseDeviceManager.setAdminRemovable(state);
+        } else {
+            Toast.makeText(this, "Please activate Device Admin before set admin removable.", Toast.LENGTH_SHORT).show();
+        }
     }
 }

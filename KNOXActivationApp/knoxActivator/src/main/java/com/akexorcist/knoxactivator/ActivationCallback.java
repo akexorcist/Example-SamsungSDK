@@ -6,11 +6,11 @@ package com.akexorcist.knoxactivator;
 public interface ActivationCallback {
     void onDeviceAdminActivated();
 
+    void onDeviceAdminActivationCancelled();
+
     void onDeviceAdminDeactivated();
 
     void onLicenseActivated();
 
     void onLicenseActivateFailed(int errorType, String errorMessage);
-
-    void onLicenseDeactivated();
 }

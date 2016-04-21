@@ -1,5 +1,6 @@
 package com.akexorcist.knoxactivator;
 
+import android.app.Activity;
 import android.app.admin.DevicePolicyManager;
 import android.app.enterprise.EnterpriseDeviceManager;
 import android.app.enterprise.license.EnterpriseLicenseManager;
@@ -11,7 +12,6 @@ import com.akexorcist.knoxactivator.event.AdminActivatedEvent;
 import com.akexorcist.knoxactivator.event.AdminDeactivatedEvent;
 import com.akexorcist.knoxactivator.event.LicenseActivatedEvent;
 import com.akexorcist.knoxactivator.event.LicenseActivationFailedEvent;
-import com.akexorcist.knoxactivator.event.LicenseDeactivatedEvent;
 import com.akexorcist.knoxactivator.receiver.AdminActivationReceiver;
 import com.squareup.otto.Subscribe;
 
@@ -19,6 +19,8 @@ import com.squareup.otto.Subscribe;
  * Created by Akexorcist on 4/20/2016 AD.
  */
 public class KnoxActivationManager {
+    public static final int REQUEST_CODE_KNOX = 4545;
+
     private static KnoxActivationManager knoxActivationManager;
 
     public static KnoxActivationManager getInstance() {
@@ -68,13 +70,6 @@ public class KnoxActivationManager {
     }
 
     @Subscribe
-    public void onLicenseDeactivated(LicenseDeactivatedEvent event) {
-        if (activationCallback != null) {
-            activationCallback.onLicenseDeactivated();
-        }
-    }
-
-    @Subscribe
     public void onLicenseDeactivationFailed(LicenseActivationFailedEvent event) {
         if (activationCallback != null) {
             int errorType = event.getErrorType();
@@ -93,17 +88,25 @@ public class KnoxActivationManager {
         enterpriseLicenseManager.activateLicense(licenseKey, context.getPackageName());
     }
 
-    public void activateDeviceAdmin(Context context) {
-        ComponentName componentName = new ComponentName(context, AdminActivationReceiver.class);
+    public void activateDeviceAdmin(Activity activity) {
+        ComponentName componentName = new ComponentName(activity, AdminActivationReceiver.class);
         Intent intent = new Intent(DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN);
         intent.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN, componentName);
-        context.startActivity(intent);
+        activity.startActivityForResult(intent, REQUEST_CODE_KNOX);
     }
 
     public void deactivateDeviceAdmin(Context context) {
         DevicePolicyManager devicePolicyManager = (DevicePolicyManager) context.getSystemService(Context.DEVICE_POLICY_SERVICE);
         ComponentName componentName = new ComponentName(context, AdminActivationReceiver.class);
         devicePolicyManager.removeActiveAdmin(componentName);
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_CODE_KNOX &&
+                resultCode == Activity.RESULT_CANCELED &&
+                activationCallback != null) {
+            activationCallback.onDeviceAdminActivationCancelled();
+        }
     }
 
     public String getErrorMessage(int errorType) {

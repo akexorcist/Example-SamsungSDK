@@ -1,6 +1,7 @@
 package com.akexorcist.knoxactivationapp;
 
 import android.app.enterprise.EnterpriseDeviceManager;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -54,6 +55,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        KnoxActivationManager.getInstance().onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
     public void onClick(View v) {
         if (v == btnActivateDeviceAdmin) {
             KnoxActivationManager.getInstance().activateDeviceAdmin(this);
@@ -74,6 +81,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
+    public void onDeviceAdminActivationCancelled() {
+        Log.e("Check", "onDeviceAdminActivationCancelled");
+    }
+
+    @Override
     public void onDeviceAdminDeactivated() {
         Log.e("Check", "onDeviceAdminDeactivated");
     }
@@ -86,12 +98,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onLicenseActivateFailed(int errorType, String errorMessage) {
         Log.e("Check", "onLicenseActivateFailed : " + errorMessage);
-
-    }
-
-    @Override
-    public void onLicenseDeactivated() {
-        Log.e("Check", "onLicenseDeactivated");
     }
 
     public void lockDeviceAdmin() {

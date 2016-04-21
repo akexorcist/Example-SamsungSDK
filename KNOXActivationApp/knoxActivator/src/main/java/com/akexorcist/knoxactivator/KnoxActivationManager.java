@@ -12,6 +12,7 @@ import com.akexorcist.knoxactivator.event.AdminDeactivatedEvent;
 import com.akexorcist.knoxactivator.event.LicenseActivatedEvent;
 import com.akexorcist.knoxactivator.event.LicenseActivationFailedEvent;
 import com.akexorcist.knoxactivator.event.LicenseDeactivatedEvent;
+import com.akexorcist.knoxactivator.receiver.AdminActivationReceiver;
 import com.squareup.otto.Subscribe;
 
 /**

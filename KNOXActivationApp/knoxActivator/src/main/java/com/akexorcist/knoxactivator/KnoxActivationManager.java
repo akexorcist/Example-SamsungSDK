@@ -52,11 +52,9 @@ public class KnoxActivationManager {
 
     @Subscribe
     public void onDeviceAdminActivated(AdminActivatedEvent event) {
-
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-
                 if (activationCallback != null) {
                     activationCallback.onDeviceAdminActivated();
                 }
@@ -65,7 +63,7 @@ public class KnoxActivationManager {
     }
 
     @Subscribe
-    public void onDeviceAdminActivated(AdminDeactivatedEvent event) {
+    public void onDeviceAdminDeactivated(AdminDeactivatedEvent event) {
         if (activationCallback != null) {
             activationCallback.onDeviceAdminDeactivated();
         }
@@ -79,7 +77,7 @@ public class KnoxActivationManager {
     }
 
     @Subscribe
-    public void onLicenseDeactivationFailed(LicenseActivationFailedEvent event) {
+    public void onLicenseActivationFailed(LicenseActivationFailedEvent event) {
         if (activationCallback != null) {
             int errorType = event.getErrorType();
             activationCallback.onLicenseActivateFailed(errorType, getErrorMessage(errorType));

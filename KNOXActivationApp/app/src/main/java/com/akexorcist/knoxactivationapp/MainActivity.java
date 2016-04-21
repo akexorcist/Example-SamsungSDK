@@ -101,10 +101,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void lockDeviceAdmin() {
+        Log.e("Check", "lockDeviceAdmin");
         setAdminRemovable(false);
     }
 
     public void unlockDeviceAdmin() {
+        Log.e("Check", "unlockDeviceAdmin");
         setAdminRemovable(true);
     }
 

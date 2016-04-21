@@ -7,6 +7,7 @@ import android.app.enterprise.license.EnterpriseLicenseManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Handler;
 
 import com.akexorcist.knoxactivator.event.AdminActivatedEvent;
 import com.akexorcist.knoxactivator.event.AdminDeactivatedEvent;
@@ -19,6 +20,7 @@ import com.squareup.otto.Subscribe;
  * Created by Akexorcist on 4/20/2016 AD.
  */
 public class KnoxActivationManager {
+    private static final long EVENT_LISTENER_DELAY = 500;
     public static final int REQUEST_CODE_KNOX = 4545;
 
     private static KnoxActivationManager knoxActivationManager;
@@ -50,9 +52,16 @@ public class KnoxActivationManager {
 
     @Subscribe
     public void onDeviceAdminActivated(AdminActivatedEvent event) {
-        if (activationCallback != null) {
-            activationCallback.onDeviceAdminActivated();
-        }
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
+                if (activationCallback != null) {
+                    activationCallback.onDeviceAdminActivated();
+                }
+            }
+        }, EVENT_LISTENER_DELAY);
     }
 
     @Subscribe
@@ -103,9 +112,15 @@ public class KnoxActivationManager {
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_CODE_KNOX &&
-                resultCode == Activity.RESULT_CANCELED &&
-                activationCallback != null) {
-            activationCallback.onDeviceAdminActivationCancelled();
+                resultCode == Activity.RESULT_CANCELED) {
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    if (activationCallback != null) {
+                        activationCallback.onDeviceAdminActivationCancelled();
+                    }
+                }
+            }, EVENT_LISTENER_DELAY);
         }
     }
 

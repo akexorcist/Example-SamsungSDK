@@ -45,10 +45,6 @@ public class KnoxActivationManager {
         return devicePolicyManager.isAdminActive(componentName);
     }
 
-    public boolean isLicenseActivated(Context context) {
-        return KnoxActivationPreference.getInstance().getLicenseActivationState(context);
-    }
-
     @Subscribe
     public void onDeviceAdminActivated(AdminActivatedEvent event) {
         if (activationCallback != null) {

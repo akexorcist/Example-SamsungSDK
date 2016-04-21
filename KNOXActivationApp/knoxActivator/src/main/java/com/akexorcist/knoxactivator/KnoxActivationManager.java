@@ -9,7 +9,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 
-import com.akexorcist.knoxactivator.event.AdminActivatedEvent;
 import com.akexorcist.knoxactivator.event.AdminDeactivatedEvent;
 import com.akexorcist.knoxactivator.event.LicenseActivatedEvent;
 import com.akexorcist.knoxactivator.event.LicenseActivationFailedEvent;
@@ -48,18 +47,6 @@ public class KnoxActivationManager {
         DevicePolicyManager devicePolicyManager = (DevicePolicyManager) context.getSystemService(Context.DEVICE_POLICY_SERVICE);
         ComponentName componentName = new ComponentName(context, AdminActivationReceiver.class);
         return devicePolicyManager.isAdminActive(componentName);
-    }
-
-    @Subscribe
-    public void onDeviceAdminActivated(AdminActivatedEvent event) {
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                if (activationCallback != null) {
-                    activationCallback.onDeviceAdminActivated();
-                }
-            }
-        }, EVENT_LISTENER_DELAY);
     }
 
     @Subscribe
@@ -124,14 +111,17 @@ public class KnoxActivationManager {
         devicePolicyManager.removeActiveAdmin(componentName);
     }
 
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUEST_CODE_KNOX &&
-                resultCode == Activity.RESULT_CANCELED) {
+    public void onActivityResult(int requestCode, final int resultCode, Intent data) {
+        if (requestCode == REQUEST_CODE_KNOX) {
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
                     if (activationCallback != null) {
-                        activationCallback.onDeviceAdminActivationCancelled();
+                        if (resultCode == Activity.RESULT_OK) {
+                            activationCallback.onDeviceAdminActivated();
+                        } else if (resultCode == Activity.RESULT_CANCELED) {
+                            activationCallback.onDeviceAdminActivationCancelled();
+                        }
                     }
                 }
             }, EVENT_LISTENER_DELAY);

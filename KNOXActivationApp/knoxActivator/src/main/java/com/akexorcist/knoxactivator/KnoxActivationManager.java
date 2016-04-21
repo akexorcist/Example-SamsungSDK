@@ -84,6 +84,22 @@ public class KnoxActivationManager {
         }
     }
 
+    @SuppressWarnings({"WrongConstant", "TryWithIdenticalCatches"})
+    public boolean isKnoxSdkSupported(Context context) {
+        try {
+            EnterpriseDeviceManager enterpriseDeviceManager = (EnterpriseDeviceManager) context.getSystemService(EnterpriseDeviceManager.ENTERPRISE_POLICY_SERVICE);
+            enterpriseDeviceManager.getEnterpriseSdkVer();
+            return true;
+        } catch (NoSuchMethodError e) {
+            e.printStackTrace();
+        } catch (NoClassDefFoundError e) {
+            e.printStackTrace();
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
     @SuppressWarnings("WrongConstant")
     public boolean isMdmApiSupported(Context context, EnterpriseDeviceManager.EnterpriseSdkVersion requiredVersion) {
         EnterpriseDeviceManager enterpriseDeviceManager = (EnterpriseDeviceManager) context.getSystemService(EnterpriseDeviceManager.ENTERPRISE_POLICY_SERVICE);

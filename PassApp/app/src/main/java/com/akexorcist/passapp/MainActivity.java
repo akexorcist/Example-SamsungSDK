@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     };
 
-    private static String getEventStatusName(int eventStatus) {
+    private String getEventStatusName(int eventStatus) {
         switch (eventStatus) {
             case SpassFingerprint.STATUS_AUTHENTIFICATION_SUCCESS:
                 return "STATUS_AUTHENTIFICATION_SUCCESS";

@@ -1,5 +1,6 @@
 package com.akexorcist.passapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -67,6 +68,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 // Authentication Success
                 int index = spassFingerprint.getIdentifiedFingerprintIndex();
                 Toast.makeText(MainActivity.this, "Fingerprint Index : " + index, Toast.LENGTH_SHORT).show();
+                openInfoActivity();
             } else if (eventStatus == SpassFingerprint.STATUS_AUTHENTIFICATION_PASSWORD_SUCCESS) {
                 // Authentication Password Success
             } else if (eventStatus == SpassFingerprint.STATUS_USER_CANCELLED
@@ -116,5 +118,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             default:
                 return "STATUS_AUTHENTIFICATION_FAILED";
         }
+    }
+
+    private void openInfoActivity() {
+        startActivity(new Intent(this, InfoActivity.class));
     }
 }

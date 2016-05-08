@@ -11,8 +11,8 @@ import com.samsung.android.sdk.pass.Spass;
 import com.samsung.android.sdk.pass.SpassFingerprint;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    private SpassFingerprint spassFingerprint;
     private Spass spass;
+    private SpassFingerprint spassFingerprint;
 
     private Button btnVerify;
 
@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             btnVerify.setEnabled(true);
         } else {
             btnVerify.setEnabled(false);
+            Toast.makeText(this, "Device doesn't support Pass SDK.", Toast.LENGTH_SHORT).show();
         }
     }
 

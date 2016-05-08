@@ -25,8 +25,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private RelativeLayout layoutPenCanvas;
     private Button btnSave;
     private Button btnPenSetting;
-    private Spen spenPackage;
+    private Spen spen;
     private SpenNoteDoc spenNoteDoc;
+    private SpenPageDoc spenPageDoc;
     private SpenSimpleSurfaceView spenSimpleSurfaceView;
     private SpenSettingPenLayout spenSettingPenLayout;
 
@@ -72,21 +73,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void setupDrawingWorkspace() {
+        setupDrawingView();
+        setupNoteDoc();
+        setupPenSetting();
+    }
+
+    private void setupDrawingView() {
+        spenSimpleSurfaceView = new SpenSimpleSurfaceView(this);
+        spenSimpleSurfaceView.setBlankColor(Color.GRAY);
+        layoutDrawingWorkspace.addView(spenSimpleSurfaceView);
+    }
+
+    private void setupNoteDoc() {
         try {
-            spenSimpleSurfaceView = new SpenSimpleSurfaceView(this);
-            spenSimpleSurfaceView.setBlankColor(Color.GRAY);
-            layoutDrawingWorkspace.addView(spenSimpleSurfaceView);
             spenNoteDoc = new SpenNoteDoc(this, 1000, 1000);
-            SpenPageDoc spenPageDoc = spenNoteDoc.appendPage();
+            spenPageDoc = spenNoteDoc.appendPage();
             spenPageDoc.setBackgroundColor(Color.WHITE);
-            spenPageDoc.clearHistory();
             spenSimpleSurfaceView.setPageDoc(spenPageDoc, true);
-            spenSettingPenLayout = new SpenSettingPenLayout(this, "", layoutPenCanvas);
-            layoutPenSetting.addView(spenSettingPenLayout);
-            spenSettingPenLayout.setCanvasView(spenSimpleSurfaceView);
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private void setupPenSetting() {
+        spenSettingPenLayout = new SpenSettingPenLayout(this, "", layoutPenCanvas);
+        layoutPenSetting.addView(spenSettingPenLayout);
+        spenSettingPenLayout.setCanvasView(spenSimpleSurfaceView);
     }
 
     private void openPenSetting() {
@@ -94,12 +106,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         spenSettingPenLayout.setVisibility(View.VISIBLE);
     }
 
-
     private boolean setupSpen() {
-        spenPackage = new Spen();
+        spen = new Spen();
         try {
-            spenPackage.initialize(this);
-            if (spenPackage.isFeatureEnabled(Spen.DEVICE_PEN)) {
+            spen.initialize(this);
+            if (spen.isFeatureEnabled(Spen.DEVICE_PEN)) {
                 return true;
             }
         } catch (SsdkUnsupportedException e) {
@@ -111,8 +122,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         if (v == btnSave) {
-            Bitmap drawingBitmap = spenSimpleSurfaceView.captureCurrentView(true);
+            Bitmap drawingBitmap = spenSimpleSurfaceView.capturePage(1, SpenSimpleSurfaceView.CAPTURE_ALL);
             // Do something with this bitmap
+
         } else if (v == btnPenSetting) {
             openPenSetting();
         }

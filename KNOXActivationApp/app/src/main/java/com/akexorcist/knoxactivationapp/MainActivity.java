@@ -4,7 +4,6 @@ import android.app.enterprise.EnterpriseDeviceManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -13,7 +12,7 @@ import com.akexorcist.knoxactivator.ActivationCallback;
 import com.akexorcist.knoxactivator.KnoxActivationManager;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, ActivationCallback {
-    private String LICENSE_KEY = "C9BA38BFB9967E5FE515782500ED6EC36ABCF1EE0B3BC11A61141041E129F78C6F07AA79543581BD237CC5606DF14BC5D3F515EBE3BBCE99445B190F0973D8C0";
+    private String LICENSE_KEY = "YOUR_ELM_KEY";
     private Button btnActivateDeviceAdmin;
     private Button btnDeactivateDeviceAdmin;
     private Button btnLicense;
@@ -25,8 +24,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        boolean isDeviceAdminActivated = KnoxActivationManager.getInstance().isDeviceAdminActivated(this);
-//        boolean isLicenseActivated = KnoxActivationManager.getInstance().isLicenseActivated(this);
         btnActivateDeviceAdmin = (Button) findViewById(R.id.btn_activate_device_admin);
         btnDeactivateDeviceAdmin = (Button) findViewById(R.id.btn_deactivate_device_admin);
         btnLicense = (Button) findViewById(R.id.btn_license);
@@ -37,9 +34,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnLicense.setOnClickListener(this);
         btnLockDeviceAdmin.setOnClickListener(this);
         btnUnlockDeviceAdmin.setOnClickListener(this);
-//        btnActivateDeviceAdmin.setEnabled(!isDeviceAdminActivated);
-//        btnDeactivateDeviceAdmin.setEnabled(!isDeviceAdminActivated);
-//        btnLicense.setEnabled(!isLicenseActivated);
     }
 
     @Override
@@ -77,36 +71,34 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onDeviceAdminActivated() {
-        Log.e("Check", "onDeviceAdminActivated");
+        Toast.makeText(this, "Device Admin Activated.", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onDeviceAdminActivationCancelled() {
-        Log.e("Check", "onDeviceAdminActivationCancelled");
+        Toast.makeText(this, "Device Admin Activation Cancelled.", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onDeviceAdminDeactivated() {
-        Log.e("Check", "onDeviceAdminDeactivated");
+        Toast.makeText(this, "Device Admin Deactivated.", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onLicenseActivated() {
-        Log.e("Check", "onLicenseActivated");
+        Toast.makeText(this, "License Deactivated.", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onLicenseActivateFailed(int errorType, String errorMessage) {
-        Log.e("Check", "onLicenseActivateFailed : " + errorMessage);
+        Toast.makeText(this, "License Activation Failed : " + errorMessage, Toast.LENGTH_SHORT).show();
     }
 
     public void lockDeviceAdmin() {
-        Log.e("Check", "lockDeviceAdmin");
         setAdminRemovable(false);
     }
 
     public void unlockDeviceAdmin() {
-        Log.e("Check", "unlockDeviceAdmin");
         setAdminRemovable(true);
     }
 
@@ -116,7 +108,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             EnterpriseDeviceManager enterpriseDeviceManager = (EnterpriseDeviceManager) getSystemService(EnterpriseDeviceManager.ENTERPRISE_POLICY_SERVICE);
             enterpriseDeviceManager.setAdminRemovable(state);
         } else {
-            Toast.makeText(this, "Please activate Device Admin before set admin removable.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please activate Device Admin and License before set device admin removable.", Toast.LENGTH_SHORT).show();
         }
     }
 }

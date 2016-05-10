@@ -15,17 +15,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.akexorcist.knoxgeofencingapp.DoSomethingActivity" />
-    </application>
 
-    <receiver
-        android:name="com.akexorcist.knoxgeofencingapp.GeofenceReceiver"
-        android:permission="android.permission.sec.MDM_GEOFENCING">
-        <intent-filter>
-            <action android:name="edm.intent.action.device.inside" />
-            <action android:name="edm.intent.action.device.outside" />
-            <action android:name="edm.intent.action.device.location.unavailable" />
-        </intent-filter>
-    </receiver>
+        <activity android:name="com.akexorcist.knoxgeofencingapp.DoSomethingActivity" />
+
+        <receiver
+            android:name=".GeofencingReceiver"
+            android:permission="android.permission.sec.MDM_GEOFENCING" >
+            <intent-filter>
+                <action android:name="edm.intent.action.device.inside" />
+                <action android:name="edm.intent.action.device.outside" />
+                <action android:name="edm.intent.action.device.location.unavailable" />
+            </intent-filter>
+        </receiver>
+    </application>
 
 </manifest>

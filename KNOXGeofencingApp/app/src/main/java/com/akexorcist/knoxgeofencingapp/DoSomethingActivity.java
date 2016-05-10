@@ -17,7 +17,6 @@ import android.widget.Toast;
 public class DoSomethingActivity extends AppCompatActivity implements View.OnClickListener {
     private Button btnGeofencingStart;
     private Button btnGeofencingStop;
-    private Button btnGeofencingCreate;
 
     private Geofencing geofencingService;
 
@@ -42,13 +41,11 @@ public class DoSomethingActivity extends AppCompatActivity implements View.OnCli
     private void bindView() {
         btnGeofencingStart = (Button) findViewById(R.id.btn_geofencing_start);
         btnGeofencingStop = (Button) findViewById(R.id.btn_geofencing_stop);
-        btnGeofencingCreate = (Button) findViewById(R.id.btn_geofencing_create);
     }
 
     private void setupView() {
         btnGeofencingStart.setOnClickListener(this);
         btnGeofencingStop.setOnClickListener(this);
-        btnGeofencingCreate.setOnClickListener(this);
     }
 
     private void setupThing() {
@@ -71,10 +68,9 @@ public class DoSomethingActivity extends AppCompatActivity implements View.OnCli
     public void onClick(View v) {
         if (v == btnGeofencingStart) {
             startGeofencing();
+            createGeofence();
         } else if (v == btnGeofencingStop) {
             stopGeofencing();
-        } else if (v == btnGeofencingCreate) {
-            createGeofence();
         }
     }
 

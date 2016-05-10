@@ -13,7 +13,7 @@ import com.akexorcist.knoxgeofencingapp.manager.DialogManager;
 import com.akexorcist.knoxgeofencingapp.manager.ToastManager;
 
 public class MainActivity extends AppCompatActivity implements ActivationCallback {
-    private String LICENSE_KEY = "ADF98C412CE988272A5559422AA36823D4D60127012F50BBCFE3DFCFD43BB9CD27FA8EF2BB22F98BBD8CD17775638E61DC12E8474C66C8A5F5DF1405A9B2DA49";
+    private String LICENSE_KEY = "YOUR_ELM_KEY";
 
     private MaterialDialog dialogLoading;
 

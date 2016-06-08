@@ -7,12 +7,13 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private FrameLayout layoutDrawingWorkspace;
     private FrameLayout layoutPenSetting;
     private RelativeLayout layoutPenCanvas;
+    private TextView tvDeviceUnsupportedMessage;
     private Button btnSave;
     private ImageButton btnPenSetting;
 
@@ -31,6 +32,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         layoutDrawingWorkspace = (FrameLayout) findViewById(R.id.layout_drawing_workspace);
         layoutPenSetting = (FrameLayout) findViewById(R.id.layout_pen_setting);
         layoutPenCanvas = (RelativeLayout) findViewById(R.id.layout_pen_canvas);
+        tvDeviceUnsupportedMessage = (TextView) findViewById(R.id.tv_device_unsupported_message);
         btnSave = (Button) findViewById(R.id.btn_save);
         btnPenSetting = (ImageButton) findViewById(R.id.btn_pen_setting);
     }
@@ -40,9 +42,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnPenSetting.setOnClickListener(this);
 
         if (setupSpen()) {
+            tvDeviceUnsupportedMessage.setVisibility(View.GONE);
             setupDrawingWorkspace();
         } else {
-            Toast.makeText(this, "Device doesn't support S pen.", Toast.LENGTH_SHORT).show();
+            tvDeviceUnsupportedMessage.setVisibility(View.VISIBLE);
             btnSave.setEnabled(false);
             btnPenSetting.setEnabled(false);
         }

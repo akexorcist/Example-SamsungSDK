@@ -14,7 +14,17 @@
         <FrameLayout
             android:id="@+id/layout_drawing_workspace"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tv_device_unsupported_message"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/device_doesnt_support_spen"
+                android:textColor="@color/gray_dark"
+                android:textSize="@dimen/default_text_size" />
+        </FrameLayout>
 
         <FrameLayout
             android:id="@+id/layout_pen_setting"
@@ -28,13 +38,13 @@
                 android:layout_marginLeft="@dimen/default_margin_padding_large"
                 android:layout_marginStart="@dimen/default_margin_padding_large"
                 android:layout_marginTop="@dimen/default_margin_padding_large"
+                android:alpha="0.6"
                 android:background="@drawable/selector_circle_button_accent"
                 android:contentDescription="@null"
                 android:padding="@dimen/default_margin_padding"
                 android:scaleType="fitCenter"
                 android:src="@drawable/ic_pen_settings"
                 android:text="@string/pen"
-                android:alpha="0.6"
                 android:textColor="@color/white"
                 android:textSize="@dimen/default_text_size" />
 

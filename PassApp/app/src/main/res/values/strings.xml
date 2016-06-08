@@ -1,3 +1,8 @@
 <resources>
-    <string name="app_name">PassApp</string>
+    <string name="app_name">Pass Example</string>
+    <string name="welcome_description">Do anything as you want after login with fingerprint.</string>
+    <string name="welcome">Welcome</string>
+    <string name="sign_in_with_fingerprint">Sign in with Fingerprint</string>
+    <string name="sign_in_description">Please sign in with your fingerprint to use this application.</string>
+    <string name="device_does_not_supported_pass_sdk">Device doesn\'t support Pass SDK.</string>
 </resources>

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.samsung.android.sdk.SsdkUnsupportedException;
@@ -15,6 +16,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Spass spass;
     private SpassFingerprint spassFingerprint;
 
+    private TextView tvLoginDescription;
     private Button btnVerify;
 
     @Override
@@ -22,14 +24,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        btnVerify = (Button) findViewById(R.id.btn_verify);
-        btnVerify.setOnClickListener(this);
+        bindView();
+        setup();
+    }
 
+    public void bindView() {
+        tvLoginDescription = (TextView) findViewById(R.id.tv_login_description);
+        btnVerify = (Button) findViewById(R.id.btn_verify);
+    }
+
+    public void setup() {
+        btnVerify.setOnClickListener(this);
         if (setupSPass()) {
             btnVerify.setEnabled(true);
+            tvLoginDescription.setText(R.string.sign_in_description);
         } else {
             btnVerify.setEnabled(false);
-            Toast.makeText(this, "Device doesn't support Pass SDK.", Toast.LENGTH_SHORT).show();
+            tvLoginDescription.setText(R.string.device_does_not_supported_pass_sdk);
         }
     }
 

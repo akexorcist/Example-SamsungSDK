@@ -8,7 +8,7 @@
     <Button
         android:id="@+id/btn_verify"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="@dimen/sign_in_button_height"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:background="@drawable/selector_button_accent"

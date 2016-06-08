@@ -1,6 +1,5 @@
 package com.akexorcist.spenapp;
 
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -10,15 +9,6 @@ import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import com.samsung.android.sdk.SsdkUnsupportedException;
-import com.samsung.android.sdk.pen.Spen;
-import com.samsung.android.sdk.pen.document.SpenNoteDoc;
-import com.samsung.android.sdk.pen.document.SpenPageDoc;
-import com.samsung.android.sdk.pen.engine.SpenSimpleSurfaceView;
-import com.samsung.android.sdk.pen.settingui.SpenSettingPenLayout;
-
-import java.io.IOException;
-
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private FrameLayout layoutDrawingWorkspace;
     private FrameLayout layoutPenSetting;
@@ -26,11 +16,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button btnSave;
     private ImageButton btnPenSetting;
 
-    private Spen spen;
-    private SpenNoteDoc spenNoteDoc;
-    private SpenPageDoc spenPageDoc;
-    private SpenSimpleSurfaceView spenSimpleSurfaceView;
-    private SpenSettingPenLayout spenSettingPenLayout;
+    // TODO Declare Spen, SpenNoteDoc, SpenPageDoc, SpenSimpleSurfaceView and SpenSettingPenLayout instance
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,18 +55,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void closeDrawingWorkspace() {
-        if (spenSimpleSurfaceView != null) {
-            spenSimpleSurfaceView.close();
-            spenSimpleSurfaceView = null;
-        }
-        if (spenNoteDoc != null) {
-            try {
-                spenNoteDoc.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            spenNoteDoc = null;
-        }
+        // TODO Add close drawing workspace code. This method will called by onDestroy()
+
     }
 
     private void setupDrawingWorkspace() {
@@ -91,53 +67,37 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @SuppressWarnings("deprecation")
     private void setupDrawingView() {
-        spenSimpleSurfaceView = new SpenSimpleSurfaceView(this);
-        spenSimpleSurfaceView.setBlankColor(getResources().getColor(R.color.gray_light));
-        layoutDrawingWorkspace.addView(spenSimpleSurfaceView);
+        // TODO Initialize SpenSimpleSurfaceView, then add into drawing workspace layout
+
     }
 
     @SuppressWarnings("deprecation")
     private void setupNoteDoc() {
-        try {
-            spenNoteDoc = new SpenNoteDoc(this, 1000, 1000);
-            spenPageDoc = spenNoteDoc.appendPage();
-            spenPageDoc.setBackgroundColor(getResources().getColor(R.color.white));
-            spenSimpleSurfaceView.setPageDoc(spenPageDoc, true);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        // TODO Initialize SpenNoteDoc and create SpenPageDoc from SpenNoteDoc
+
     }
 
     private void setupPenSetting() {
-        spenSettingPenLayout = new SpenSettingPenLayout(this, "", layoutPenCanvas);
-        layoutPenSetting.addView(spenSettingPenLayout);
-        spenSettingPenLayout.setCanvasView(spenSimpleSurfaceView);
+        // TODO Initialize SpenSettingPenLayout, then add into pen setting layout
+        // TODO Don't forget to set SpenSettingPenLayout canvas view with SpenSimpleSurfaceView
+
     }
 
     private void openPenSetting() {
-        spenSettingPenLayout.setViewMode(SpenSettingPenLayout.VIEW_MODE_NORMAL);
-        spenSettingPenLayout.setVisibility(View.VISIBLE);
+        // TODO Call SpenSettingPenLayout method to open pen setting layout
+
     }
 
     private boolean setupSpen() {
-        spen = new Spen();
-        try {
-            spen.initialize(this);
-            if (spen.isFeatureEnabled(Spen.DEVICE_PEN)) {
-                return true;
-            }
-        } catch (SsdkUnsupportedException e) {
-            // Error Handle
-        }
+        // TODO Initialize Pen SDK and return boolean result
+
         return false;
     }
 
     @Override
     public void onClick(View v) {
         if (v == btnSave) {
-            Bitmap drawingBitmap = spenSimpleSurfaceView.capturePage(1, SpenSimpleSurfaceView.CAPTURE_ALL);
-            // Do something with this bitmap
-
+            // TODO Capture bitmap from SimpleSurfaceView
         } else if (v == btnPenSetting) {
             openPenSetting();
         }

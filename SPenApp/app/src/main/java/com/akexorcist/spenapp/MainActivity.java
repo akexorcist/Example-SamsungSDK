@@ -1,12 +1,12 @@
 package com.akexorcist.spenapp;
 
 import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private FrameLayout layoutPenSetting;
     private RelativeLayout layoutPenCanvas;
     private Button btnSave;
-    private Button btnPenSetting;
+    private ImageButton btnPenSetting;
 
     private Spen spen;
     private SpenNoteDoc spenNoteDoc;
@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         layoutPenSetting = (FrameLayout) findViewById(R.id.layout_pen_setting);
         layoutPenCanvas = (RelativeLayout) findViewById(R.id.layout_pen_canvas);
         btnSave = (Button) findViewById(R.id.btn_save);
-        btnPenSetting = (Button) findViewById(R.id.btn_pen_setting);
+        btnPenSetting = (ImageButton) findViewById(R.id.btn_pen_setting);
     }
 
     private void setup() {
@@ -57,6 +57,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             setupDrawingWorkspace();
         } else {
             Toast.makeText(this, "Device doesn't support S pen.", Toast.LENGTH_SHORT).show();
+            btnSave.setEnabled(false);
+            btnPenSetting.setEnabled(false);
         }
     }
 
@@ -87,17 +89,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setupPenSetting();
     }
 
+    @SuppressWarnings("deprecation")
     private void setupDrawingView() {
         spenSimpleSurfaceView = new SpenSimpleSurfaceView(this);
-        spenSimpleSurfaceView.setBlankColor(Color.GRAY);
+        spenSimpleSurfaceView.setBlankColor(getResources().getColor(R.color.gray_light));
         layoutDrawingWorkspace.addView(spenSimpleSurfaceView);
     }
 
+    @SuppressWarnings("deprecation")
     private void setupNoteDoc() {
         try {
             spenNoteDoc = new SpenNoteDoc(this, 1000, 1000);
             spenPageDoc = spenNoteDoc.appendPage();
-            spenPageDoc.setBackgroundColor(Color.WHITE);
+            spenPageDoc.setBackgroundColor(getResources().getColor(R.color.white));
             spenSimpleSurfaceView.setPageDoc(spenPageDoc, true);
         } catch (IOException e) {
             e.printStackTrace();

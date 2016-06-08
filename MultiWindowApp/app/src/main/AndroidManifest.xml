@@ -2,7 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.akexorcist.myapplication">
 
-
     <uses-permission android:name="com.samsung.android.providers.context.permission.WRITE_USE_APP_FEATURE_SURVEY" />
 
     <application
@@ -16,17 +15,11 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-                <category android:name="android.intent.category.MULTIWINDOW_LAUNCHER" />
+                <!-- //TODO Add category for multi window launcher -->
             </intent-filter>
         </activity>
 
-        <meta-data
-            android:name="com.samsung.android.sdk.multiwindow.enable"
-            android:value="true" />
-
-        <meta-data
-            android:name="com.samsung.android.sdk.multiwindow.multiinstance.enable"
-            android:value="true" />
+        <!-- //TODO Add meta data for multi window and multi instance support-->
     </application>
 
 </manifest>

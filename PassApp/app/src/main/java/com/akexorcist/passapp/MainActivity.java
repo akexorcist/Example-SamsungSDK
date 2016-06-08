@@ -50,13 +50,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         if (v == btnVerify) {
-            startIdentifyDialog(true);
+            startIdentifyDialog();
         }
     }
 
-    private void startIdentifyDialog(boolean backup) {
+    private void startIdentifyDialog() {
         if (spassFingerprint != null) {
-            spassFingerprint.startIdentifyWithDialog(this, mIdentifyListenerDialog, backup);
+            spassFingerprint.startIdentifyWithDialog(this, mIdentifyListenerDialog, false);
         }
     }
 

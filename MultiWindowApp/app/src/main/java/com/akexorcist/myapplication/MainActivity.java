@@ -16,9 +16,9 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Multi window code is in AndroidManifest.xml, not here.
         ivAndroidLogo = (ImageView) findViewById(R.id.iv_android_logo);
         ivAndroidLogo.setOnTouchListener(this);
-
     }
 
     @Override

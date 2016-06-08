@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private RelativeLayout layoutPenCanvas;
     private Button btnSave;
     private Button btnPenSetting;
+
     private Spen spen;
     private SpenNoteDoc spenNoteDoc;
     private SpenPageDoc spenPageDoc;
@@ -36,11 +37,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        bindView();
+        setup();
+    }
+
+    private void bindView() {
         layoutDrawingWorkspace = (FrameLayout) findViewById(R.id.layout_drawing_workspace);
         layoutPenSetting = (FrameLayout) findViewById(R.id.layout_pen_setting);
         layoutPenCanvas = (RelativeLayout) findViewById(R.id.layout_pen_canvas);
         btnSave = (Button) findViewById(R.id.btn_save);
         btnPenSetting = (Button) findViewById(R.id.btn_pen_setting);
+    }
+
+    private void setup() {
         btnSave.setOnClickListener(this);
         btnPenSetting.setOnClickListener(this);
 

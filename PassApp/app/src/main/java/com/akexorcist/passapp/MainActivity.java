@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             // Fingerprint scanning is finish
 
             // TODO Check result from fingerprint scanning
-            // if status is success, open next activity with openInfoActivity();
+            // TODO if status is success, open next activity with openInfoActivity();
         }
 
         @Override

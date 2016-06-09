@@ -20,7 +20,6 @@ public class DoSomethingActivity extends AppCompatActivity implements View.OnCli
 
     private Geofencing geofencingService;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

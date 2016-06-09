@@ -8,7 +8,6 @@ import android.support.v7.app.AppCompatActivity;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.akexorcist.knoxactivator.ActivationCallback;
-import com.akexorcist.knoxactivator.KnoxActivationManager;
 import com.akexorcist.knoxsampleapp.manager.DialogManager;
 import com.akexorcist.knoxsampleapp.manager.SharedPreferenceManager;
 import com.akexorcist.knoxsampleapp.manager.ToastManager;
@@ -28,19 +27,22 @@ public class MainActivity extends AppCompatActivity implements ActivationCallbac
     @Override
     public void onStart() {
         super.onStart();
-        KnoxActivationManager.getInstance().register(this);
+        // TODO Register KnoxActivationManager
+
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        KnoxActivationManager.getInstance().unregister();
+        // TODO Unregister KnoxActivationManager
+
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        KnoxActivationManager.getInstance().onActivityResult(requestCode, resultCode, data);
+        // TODO Call onActivityResult from KnoxActivationManager
+
     }
 
     @Override
@@ -73,7 +75,9 @@ public class MainActivity extends AppCompatActivity implements ActivationCallbac
     }
 
     private void checkDeviceAdminActivation() {
-        if (KnoxActivationManager.getInstance().isKnoxSdkSupported(this)) {
+        // TODO Check KNOX SDK support with KnoxActivationManager
+        // TODO If KNOX SDK is support for this device, then call activateDeviceAdmin
+        if (true) {
             activateDeviceAdmin();
         } else {
             showDeviceUnsupportedProblem();
@@ -81,8 +85,11 @@ public class MainActivity extends AppCompatActivity implements ActivationCallbac
     }
 
     private void activateDeviceAdmin() {
-        if (!KnoxActivationManager.getInstance().isDeviceAdminActivated(this)) {
-            KnoxActivationManager.getInstance().activateDeviceAdmin(this);
+        // TODO Check Device Admin is enable with KnoxActivationManager
+        // TODO If Device Admin isn't enable yet, then call activateDeviceAdmin from KnoxActivationManager
+        if (true) {
+            // TODO Call activateDeviceAdmin method from KnoxActivationManager
+
         } else {
             onDeviceAdminActivated();
         }
@@ -91,7 +98,8 @@ public class MainActivity extends AppCompatActivity implements ActivationCallbac
     private void activateKnoxLicense() {
         if (!SharedPreferenceManager.isLicenseActivated(this)) {
             showLoadingDialog();
-            KnoxActivationManager.getInstance().activateLicense(this, LICENSE_KEY);
+            // TODO Call activateLicense method from KnoxActivationManager for license activation
+
         } else {
             showLicenseActivationSuccess();
             goToRestrictionActivity();

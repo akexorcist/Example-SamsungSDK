@@ -4,19 +4,25 @@ import android.app.enterprise.geofencing.CircularGeofence;
 import android.app.enterprise.geofencing.Geofence;
 import android.app.enterprise.geofencing.Geofencing;
 import android.app.enterprise.geofencing.LatLongPoint;
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.akexorcist.knoxgeofencingapp.bus.BusProvider;
+import com.akexorcist.knoxgeofencingapp.bus.event.InsideGeofenceEvent;
+import com.akexorcist.knoxgeofencingapp.bus.event.LocationUnavailableEvent;
+import com.akexorcist.knoxgeofencingapp.bus.event.OutsideGeofenceEvent;
+import com.squareup.otto.Subscribe;
+
+import java.util.List;
+
 public class DoSomethingActivity extends AppCompatActivity implements View.OnClickListener {
     private Button btnGeofencingStart;
     private Button btnGeofencingStop;
+    private Button btnCreateGeofence;
+    private Button btnClearGeofence;
 
     private Geofencing geofencingService;
 
@@ -28,48 +34,64 @@ public class DoSomethingActivity extends AppCompatActivity implements View.OnCli
         bindView();
         setupView();
         setupThing();
-        createGeofencingReceiver();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        clearGeofenceReceiver();
+        BusProvider.getProvider().unregister(this);
     }
 
     private void bindView() {
         btnGeofencingStart = (Button) findViewById(R.id.btn_geofencing_start);
         btnGeofencingStop = (Button) findViewById(R.id.btn_geofencing_stop);
+        btnCreateGeofence = (Button) findViewById(R.id.btn_create_geofence);
+        btnClearGeofence = (Button) findViewById(R.id.btn_clear_geofence);
     }
 
     private void setupView() {
         btnGeofencingStart.setOnClickListener(this);
         btnGeofencingStop.setOnClickListener(this);
+        btnCreateGeofence.setOnClickListener(this);
+        btnClearGeofence.setOnClickListener(this);
     }
 
     private void setupThing() {
+        BusProvider.getProvider().register(this);
         geofencingService = Geofencing.getInstance(this);
-    }
-
-    private void createGeofencingReceiver() {
-        IntentFilter intentFilter = new IntentFilter();
-        intentFilter.addAction(Geofencing.ACTION_DEVICE_INSIDE_GEOFENCE);
-        intentFilter.addAction(Geofencing.ACTION_DEVICE_OUTSIDE_GEOFENCE);
-        intentFilter.addAction(Geofencing.ACTION_DEVICE_LOCATION_UNAVAILABLE);
-        registerReceiver(geofencingReceiver, intentFilter);
-    }
-
-    private void clearGeofenceReceiver() {
-        unregisterReceiver(geofencingReceiver);
     }
 
     @Override
     public void onClick(View v) {
         if (v == btnGeofencingStart) {
             startGeofencing();
-            createGeofence();
         } else if (v == btnGeofencingStop) {
             stopGeofencing();
+        } else if (v == btnCreateGeofence) {
+            createGeofence();
+        } else if (v == btnClearGeofence) {
+            clearGeofence();
+        }
+    }
+
+    private void createGeofence() {
+        LatLongPoint center = new LatLongPoint(13.678505, 100.615474);
+        double radius = 1000;
+        CircularGeofence circularGeofence = new CircularGeofence(center, radius);
+        int id = geofencingService.createGeofence(circularGeofence);
+        if (id == -1) {
+            Toast.makeText(this, R.string.already_exists_geofence, Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, getString(R.string.geofence_was_created, id), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void clearGeofence() {
+        List<Geofence> geofenceList = geofencingService.getGeofences();
+        if (geofenceList != null) {
+            for (Geofence geofence : geofenceList) {
+                geofencingService.destroyGeofence(geofence.id);
+            }
         }
     }
 
@@ -81,59 +103,18 @@ public class DoSomethingActivity extends AppCompatActivity implements View.OnCli
         geofencingService.stopGeofencing();
     }
 
-    private void createGeofence() {
-        LatLongPoint center = new LatLongPoint(13.6784555, 100.6149553);
-        double radius = 1000;
-        CircularGeofence circularGeofence = new CircularGeofence(center, radius);
-        geofencingService.createGeofence(circularGeofence);
+    @Subscribe
+    public void onInsideGeofenceEvent(InsideGeofenceEvent event) {
+        // When device is inside geofence
     }
 
-    private BroadcastReceiver geofencingReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            String action = intent.getAction();
-            if (action.equalsIgnoreCase(Geofencing.ACTION_DEVICE_INSIDE_GEOFENCE)) {
-                showToast("Device is inside geofence");
-                checkGeofenceInfo(intent.getExtras());
-            } else if (action.equalsIgnoreCase(Geofencing.ACTION_DEVICE_OUTSIDE_GEOFENCE)) {
-                showToast("Device is outside geofence");
-                checkGeofenceInfo(intent.getExtras());
-            } else if (action.equalsIgnoreCase(Geofencing.ACTION_DEVICE_LOCATION_UNAVAILABLE)) {
-                showToast("Device location unavailable");
-            }
-        }
-    };
-
-    private void checkGeofenceInfo(Bundle bundle) {
-        int[] geofenceIdList = bundle.getIntArray(Geofencing.INTENT_EXTRA_ID);
-        if (geofenceIdList != null) {
-            for (int id : geofenceIdList) {
-                Geofence geofence = getGeofenceById(id);
-                if (geofence instanceof CircularGeofence) {
-                    getCircularGeofenceInfo(geofence);
-                }
-            }
-        }
+    @Subscribe
+    public void onOutsideGeofenceEvent(OutsideGeofenceEvent event) {
+        // When device is outside geofence
     }
 
-    private Geofence getGeofenceById(int id) {
-        for (Geofence geofence : geofencingService.getGeofences()) {
-            if (geofence.id == id) {
-                return geofence;
-            }
-        }
-        return null;
-    }
-
-    private void getCircularGeofenceInfo(Geofence geofence) {
-        CircularGeofence circularGeofence = (CircularGeofence) geofence;
-        showToast("Geofence ID : " + circularGeofence.id +
-                " | Type : " + circularGeofence.type +
-                " | Center : " + circularGeofence.center.latitude + ", " + circularGeofence.center.longitude +
-                " | Radius : " + circularGeofence.radius);
-    }
-
-    private void showToast(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    @Subscribe
+    public void onLocationUnavailable(LocationUnavailableEvent event) {
+        // When device location is unavailable
     }
 }

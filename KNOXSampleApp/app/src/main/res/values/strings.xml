@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">KNOX Sample App</string>
+    <string name="app_name">KNOX Activation Example</string>
     <string name="main_activity">Main Activity</string>
     <string name="do_something_activity">Do Something Activity</string>
     <string name="auto_activation_description">Auto license and device admin activation will start immediately</string>

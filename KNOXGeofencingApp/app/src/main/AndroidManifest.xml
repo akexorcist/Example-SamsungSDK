@@ -4,7 +4,7 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/ic_launcher_geofencing"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
@@ -20,13 +20,14 @@
 
         <receiver
             android:name=".GeofencingReceiver"
-            android:permission="android.permission.sec.MDM_GEOFENCING" >
+            android:permission="android.permission.sec.MDM_GEOFENCING">
             <intent-filter>
                 <action android:name="edm.intent.action.device.inside" />
                 <action android:name="edm.intent.action.device.outside" />
                 <action android:name="edm.intent.action.device.location.unavailable" />
             </intent-filter>
         </receiver>
+
     </application>
 
 </manifest>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/default_margin_padding_large"
+    android:paddingLeft="@dimen/default_margin_padding_large"
+    android:paddingRight="@dimen/default_margin_padding_large"
+    android:paddingTop="@dimen/default_margin_padding_large"
+    tools:context="com.akexorcist.knoxmultiuserapp.DoSomethingActivity">
+
+    <Button
+        android:id="@+id/btn_geofencing_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/default_margin_padding_large"
+        android:layout_marginTop="@dimen/default_margin_padding_large"
+        android:background="@drawable/selector_round_button_accent"
+        android:text="@string/start_geofencing"
+        android:textColor="@color/white"
+        android:textSize="@dimen/default_text_size" />
+
+    <Button
+        android:id="@+id/btn_geofencing_stop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/default_margin_padding_large"
+        android:background="@drawable/selector_round_button_accent"
+        android:text="@string/stop_geofencing"
+        android:textColor="@color/white"
+        android:textSize="@dimen/default_text_size" />
+
+    <Button
+        android:id="@+id/btn_create_geofence"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/default_margin_padding_large"
+        android:background="@drawable/selector_round_button_accent"
+        android:text="@string/create_geofencing"
+        android:textColor="@color/white"
+        android:textSize="@dimen/default_text_size" />
+
+    <Button
+        android:id="@+id/btn_clear_geofence"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/default_margin_padding_large"
+        android:background="@drawable/selector_round_button_accent"
+        android:text="@string/clear_geofencing"
+        android:textColor="@color/white"
+        android:textSize="@dimen/default_text_size" />
+
+</LinearLayout>

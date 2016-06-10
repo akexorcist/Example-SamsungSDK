@@ -51,19 +51,24 @@ public class DoSomethingActivity extends AppCompatActivity implements View.OnCli
     }
 
     private void enableKiosk() {
-        // TODO Setup kiosk mode setting
+        setKioskSettings();
         // TODO Start kiosk mode
 
     }
 
     private void disableKiosk() {
-        // TODO Clear all kiosk mode setting
+        clearKioskSettings();
         // TODO Stop kiosk mode
 
     }
 
-    private void setKioskSettings(boolean state) {
-        // TODO Add kiosk mode setting
+    private void setKioskSettings() {
+        // TODO Setup kiosk mode setting
+
+    }
+
+    private void clearKioskSettings() {
+        // TODO Clear all kiosk mode setting
 
     }
 }

@@ -43,6 +43,13 @@ public class DoSomethingActivity extends AppCompatActivity implements View.OnCli
 
     private void setupThing() {
         kioskModeService = KioskMode.getInstance(this);
+        if (kioskModeService.isKioskModeEnabled()) {
+            btnKioskStart.setEnabled(false);
+            btnKioskStop.setEnabled(true);
+        } else {
+            btnKioskStart.setEnabled(true);
+            btnKioskStop.setEnabled(false);
+        }
     }
 
     @Override

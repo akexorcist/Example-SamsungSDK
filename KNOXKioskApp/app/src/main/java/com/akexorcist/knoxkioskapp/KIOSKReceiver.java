@@ -28,25 +28,17 @@ public class KIOSKReceiver extends BroadcastReceiver {
     }
 
     @SuppressWarnings("WrongConstant")
-
-
     void addApplicationShortcut(Context context) {
         EnterpriseDeviceManager edm = (EnterpriseDeviceManager) context.getSystemService(EnterpriseDeviceManager.ENTERPRISE_POLICY_SERVICE);
         ApplicationPolicy appPolicy = edm.getApplicationPolicy();
         appPolicy.addHomeShortcut(context.getPackageName(), null);
     }
 
-
     @SuppressWarnings("WrongConstant")
-
-
     void removeApplicationShortcut(Context context) {
-        EnterpriseDeviceManager edm = (EnterpriseDeviceManager)
-                context.getSystemService(EnterpriseDeviceManager.ENTERPRISE_POLICY_SERVICE);
+        EnterpriseDeviceManager edm = (EnterpriseDeviceManager) context.getSystemService(EnterpriseDeviceManager.ENTERPRISE_POLICY_SERVICE);
         ApplicationPolicy appPolicy = edm.getApplicationPolicy();
         appPolicy.deleteHomeShortcut(context.getPackageName(), null);
     }
-
-
 }
 

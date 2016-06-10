@@ -17,10 +17,4 @@
     <string name="license_activation_success">KNOX license activation success</string>
     <string name="license_activation_loading_title">License Activating</string>
     <string name="license_activation_loading_content">Loading…</string>
-    <string name="stop_geofencing">Stop Geofencing</string>
-    <string name="start_geofencing">Start Geofencing</string>
-    <string name="create_geofencing">Create Geofencing</string>
-    <string name="clear_geofencing">Clear Geofencing</string>
-    <string name="already_exists_geofence">This geofence is already exists.</string>
-    <string name="geofence_was_created">Geofence id %s was created.</string>
 </resources>

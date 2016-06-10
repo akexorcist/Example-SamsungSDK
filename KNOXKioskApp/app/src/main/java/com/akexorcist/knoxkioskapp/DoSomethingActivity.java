@@ -1,20 +1,15 @@
 package com.akexorcist.knoxkioskapp;
 
-import android.app.enterprise.kioskmode.KioskMode;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
-
-import java.util.Arrays;
-import java.util.List;
 
 public class DoSomethingActivity extends AppCompatActivity implements View.OnClickListener {
     private Button btnKioskStart;
     private Button btnKioskStop;
 
-    private KioskMode kioskModeService;
+    // TODO Declare kiosk mode service
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,14 +37,8 @@ public class DoSomethingActivity extends AppCompatActivity implements View.OnCli
     }
 
     private void setupThing() {
-        kioskModeService = KioskMode.getInstance(this);
-        if (kioskModeService.isKioskModeEnabled()) {
-            btnKioskStart.setEnabled(false);
-            btnKioskStop.setEnabled(true);
-        } else {
-            btnKioskStart.setEnabled(true);
-            btnKioskStop.setEnabled(false);
-        }
+        // TODO Create kiosk mode service instance
+
     }
 
     @Override
@@ -62,19 +51,19 @@ public class DoSomethingActivity extends AppCompatActivity implements View.OnCli
     }
 
     private void enableKiosk() {
-        setKioskSettings(false);
-        kioskModeService.enableKioskMode();
+        // TODO Setup kiosk mode setting
+        // TODO Start kiosk mode
+
     }
 
     private void disableKiosk() {
-        setKioskSettings(true);
-        kioskModeService.disableKioskMode();
+        // TODO Clear all kiosk mode setting
+        // TODO Stop kiosk mode
+
     }
 
     private void setKioskSettings(boolean state) {
-        List<Integer> keyList = Arrays.asList(KeyEvent.KEYCODE_HOME, KeyEvent.KEYCODE_BACK);
-        kioskModeService.allowHardwareKeys(keyList, state);
-        kioskModeService.allowMultiWindowMode(state);
-        kioskModeService.allowTaskManager(state);
+        // TODO Add kiosk mode setting
+
     }
 }

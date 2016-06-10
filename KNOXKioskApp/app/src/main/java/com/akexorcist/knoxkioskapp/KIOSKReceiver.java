@@ -1,7 +1,5 @@
 package com.akexorcist.knoxkioskapp;
 
-import android.app.enterprise.ApplicationPolicy;
-import android.app.enterprise.EnterpriseDeviceManager;
 import android.app.enterprise.kioskmode.KioskMode;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -29,16 +27,12 @@ public class KIOSKReceiver extends BroadcastReceiver {
 
     @SuppressWarnings("WrongConstant")
     void addApplicationShortcut(Context context) {
-        EnterpriseDeviceManager edm = (EnterpriseDeviceManager) context.getSystemService(EnterpriseDeviceManager.ENTERPRISE_POLICY_SERVICE);
-        ApplicationPolicy appPolicy = edm.getApplicationPolicy();
-        appPolicy.addHomeShortcut(context.getPackageName(), null);
+        // TODO Add this application shortcut to kiosk mode launcher
     }
 
     @SuppressWarnings("WrongConstant")
     void removeApplicationShortcut(Context context) {
-        EnterpriseDeviceManager edm = (EnterpriseDeviceManager) context.getSystemService(EnterpriseDeviceManager.ENTERPRISE_POLICY_SERVICE);
-        ApplicationPolicy appPolicy = edm.getApplicationPolicy();
-        appPolicy.deleteHomeShortcut(context.getPackageName(), null);
+        // TODO Remove this application shortcut to kiosk mode launcher
     }
 }
 

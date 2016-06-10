@@ -1,6 +1,5 @@
 package com.akexorcist.knoxlsoapp;
 
-import android.app.enterprise.lso.LockscreenOverlay;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -9,11 +8,10 @@ import android.widget.Button;
 import com.akexorcist.knoxlsoapp.manager.FileAssetManager;
 
 public class DoSomethingActivity extends AppCompatActivity implements View.OnClickListener {
-    private String logoFileName = "akexorcist_logo.png";
     private Button btnSetCustomLSO;
     private Button btnClearCustomLSO;
 
-    private LockscreenOverlay lso;
+    // TODO Declare lockscreen overlay
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +35,8 @@ public class DoSomethingActivity extends AppCompatActivity implements View.OnCli
 
     private void setupThing() {
         FileAssetManager.copyFileFromAssetToStorage(this, logoFileName, getFilesDir().getAbsolutePath() + logoFileName);
-        lso = LockscreenOverlay.getInstance(this);
+        // TODO Create lockscreen overlay instance
+
     }
 
     @Override
@@ -50,14 +49,12 @@ public class DoSomethingActivity extends AppCompatActivity implements View.OnCli
     }
 
     private void setCustomLSO() {
-        String name = "Sleeping For Less";
-        String logo = getFilesDir().getAbsolutePath() + logoFileName;
-        String address = "กรุงเทพมหานคร อมรรัตนโกสินทร์ มหินทรายุทธยา มหาดิลกภพ นพรัตนราชธานีบุรีรมย์...";
-        String phone = "0987654321";
-        lso.configure(name, logo, address, phone);
+        // TODO Set custom lockscreen overlay
+
     }
 
     private void clearCustomLSO() {
-        lso.resetAll();
+        // TODO Clear all custom lockscreen overlay
+
     }
 }

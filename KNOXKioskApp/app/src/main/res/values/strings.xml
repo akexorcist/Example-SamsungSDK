@@ -13,4 +13,6 @@
     <string name="license_activation_success">KNOX license activation success</string>
     <string name="license_activation_loading_title">License Activating</string>
     <string name="license_activation_loading_content">Loading…</string>
+    <string name="start_kiosk_mode">Start Kiosk Mode</string>
+    <string name="stop_kiosk_mode">Stop Kiosk Mode</string>
 </resources>

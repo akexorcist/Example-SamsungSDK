@@ -8,6 +8,7 @@ import android.widget.Button;
 import com.akexorcist.knoxlsoapp.manager.FileAssetManager;
 
 public class DoSomethingActivity extends AppCompatActivity implements View.OnClickListener {
+    private String logoFileName = "akexorcist_logo.png";
     private Button btnSetCustomLSO;
     private Button btnClearCustomLSO;
 

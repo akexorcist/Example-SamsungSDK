@@ -12,7 +12,7 @@ public class DoSomethingActivity extends AppCompatActivity implements View.OnCli
     private Button btnSetCustomLSO;
     private Button btnClearCustomLSO;
 
-    // TODO Declare lockscreen overlay
+    // TODO (1) : Declare lockscreen overlay
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +36,7 @@ public class DoSomethingActivity extends AppCompatActivity implements View.OnCli
 
     private void setupThing() {
         FileAssetManager.copyFileFromAssetToStorage(this, logoFileName, getFilesDir().getAbsolutePath() + logoFileName);
-        // TODO Create lockscreen overlay instance
+        // TODO (2) : Create lockscreen overlay instance
 
     }
 
@@ -50,12 +50,12 @@ public class DoSomethingActivity extends AppCompatActivity implements View.OnCli
     }
 
     private void setCustomLSO() {
-        // TODO Set custom lockscreen overlay
+        // TODO (3) : Set custom lockscreen overlay
 
     }
 
     private void clearCustomLSO() {
-        // TODO Clear all custom lockscreen overlay
+        // TODO (4) : Clear all custom lockscreen overlay
 
     }
 }

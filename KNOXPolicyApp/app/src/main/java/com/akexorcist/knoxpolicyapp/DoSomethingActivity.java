@@ -34,7 +34,6 @@ public class DoSomethingActivity extends AppCompatActivity {
     private Button btnSettingsDisallow;
     private Button btnSettingsAllow;
 
-    private EnterpriseDeviceManager edm;
     private ApplicationPolicy appPolicy;
     private LocationPolicy locationPolicy;
     private RestrictionPolicy restrictionPolicy;
@@ -93,7 +92,7 @@ public class DoSomethingActivity extends AppCompatActivity {
 
     @SuppressWarnings("WrongConstant")
     private void setupThing() {
-        edm = (EnterpriseDeviceManager) getSystemService(EnterpriseDeviceManager.ENTERPRISE_POLICY_SERVICE);
+        EnterpriseDeviceManager edm = (EnterpriseDeviceManager) getSystemService(EnterpriseDeviceManager.ENTERPRISE_POLICY_SERVICE);
         appPolicy = edm.getApplicationPolicy();
         locationPolicy = edm.getLocationPolicy();
         restrictionPolicy = edm.getRestrictionPolicy();

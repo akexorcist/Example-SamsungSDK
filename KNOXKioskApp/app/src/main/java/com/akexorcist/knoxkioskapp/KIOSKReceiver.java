@@ -14,25 +14,25 @@ public class KIOSKReceiver extends BroadcastReceiver {
         if (intent != null) {
             String action = intent.getAction();
             if (action.equals(KioskMode.ACTION_ENABLE_KIOSK_MODE_RESULT)) {
-                // KIOSK enabled
-                addApplicationShortcut(context);
+                // TODO (3) Add application shortcut when kiosk mode enabled
+
             } else if (action.equals(KioskMode.ACTION_DISABLE_KIOSK_MODE_RESULT)) {
-                // KIOSK disabled
-                removeApplicationShortcut(context);
+                // TODO (4) Remove application shortcut when kiosk mode disable
+
             } else if (action.equals(KioskMode.ACTION_UNEXPECTED_KIOSK_BEHAVIOR)) {
-                // KIOSK unexpected error
+                // TODO (5) Do something when some error occurred
             }
         }
     }
 
     @SuppressWarnings("WrongConstant")
-    void addApplicationShortcut(Context context) {
-        // TODO Add this application shortcut to kiosk mode launcher
+    void addApplicationShortcut(Context context, String packageName) {
+        // TODO (1) Add this application shortcut to kiosk mode launcher
     }
 
     @SuppressWarnings("WrongConstant")
-    void removeApplicationShortcut(Context context) {
-        // TODO Remove this application shortcut to kiosk mode launcher
+    void removeApplicationShortcut(Context context, String packageName) {
+        // TODO (2) Remove this application shortcut to kiosk mode launcher
     }
 }
 

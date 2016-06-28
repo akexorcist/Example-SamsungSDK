@@ -1,9 +1,5 @@
 package com.akexorcist.knoxpolicyapp;
 
-import android.app.enterprise.ApplicationPolicy;
-import android.app.enterprise.EnterpriseDeviceManager;
-import android.app.enterprise.LocationPolicy;
-import android.app.enterprise.RestrictionPolicy;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -34,10 +30,9 @@ public class DoSomethingActivity extends AppCompatActivity {
     private Button btnSettingsDisallow;
     private Button btnSettingsAllow;
 
-    private EnterpriseDeviceManager edm;
-    private ApplicationPolicy appPolicy;
-    private LocationPolicy locationPolicy;
-    private RestrictionPolicy restrictionPolicy;
+    // TODO (1) : Declare application policy
+    // TODO (2) : Declare location policy
+    // TODO (3) : Declare restriction policy
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,10 +88,10 @@ public class DoSomethingActivity extends AppCompatActivity {
 
     @SuppressWarnings("WrongConstant")
     private void setupThing() {
-        edm = (EnterpriseDeviceManager) getSystemService(EnterpriseDeviceManager.ENTERPRISE_POLICY_SERVICE);
-        appPolicy = edm.getApplicationPolicy();
-        locationPolicy = edm.getLocationPolicy();
-        restrictionPolicy = edm.getRestrictionPolicy();
+        // TODO (4) : Create application policy instance
+        // TODO (5) : Create location policy instance
+        // TODO (6) : Create restriction policy instance
+
     }
 
     private View.OnClickListener facebookClickListener = new View.OnClickListener() {
@@ -104,9 +99,11 @@ public class DoSomethingActivity extends AppCompatActivity {
         public void onClick(View v) {
             List<String> appList = Arrays.asList("com.facebook.katana");
             if (v == btnFacebookPrevent) {
-                appPolicy.addPackagesToPreventStartBlackList(appList);
+                // TODO (7) : Prevent Facebook app to start by add package name into blacklist
+
             } else if (v == btnFacebookClear) {
-                appPolicy.removePackagesFromPreventStartBlackList(appList);
+                // TODO (8) : Clear Facebook app to start by remove package name from blacklist
+
             }
         }
     };
@@ -116,9 +113,11 @@ public class DoSomethingActivity extends AppCompatActivity {
         public void onClick(View v) {
             String calculatorPackage = "com.sec.android.app.popupcalculator";
             if (v == btnCalculatorChange) {
-                appPolicy.changeApplicationName(calculatorPackage, "iTune");
+                // TODO (9) : Change Calculator app name to another app name
+
             } else if (v == btnCalculatorClear) {
-                appPolicy.changeApplicationName(calculatorPackage, "Calculator");
+                // TODO (10) : Restore Calculator app name
+
             }
         }
     };
@@ -127,9 +126,11 @@ public class DoSomethingActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             if (v == btnYouTubeDisable) {
-                appPolicy.disableYouTube();
+                // TODO (11) : Disable YouTube app
+
             } else if (v == btnYouTubeEnable) {
-                appPolicy.enableYouTube();
+                // TODO (12) : Enable YouTube app
+
             }
         }
     };
@@ -139,9 +140,11 @@ public class DoSomethingActivity extends AppCompatActivity {
         public void onClick(View v) {
             String drivePackage = "com.google.android.apps.docs";
             if (v == btnDriveDisable) {
-                appPolicy.setDisableApplication(drivePackage);
+                // TODO (13) : Disable Google Drive app
+
             } else if (v == btnDriveEnable) {
-                appPolicy.setEnableApplication(drivePackage);
+                // TODO (14) : Enaable Google Drive app
+
             }
         }
     };
@@ -150,9 +153,11 @@ public class DoSomethingActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             if (v == btnGpsStart) {
-                locationPolicy.startGPS(true);
+                // TODO (15) : Start GPS
+
             } else if (v == btnGpsStop) {
-                locationPolicy.startGPS(false);
+                // TODO (16) : Stop GPS
+
             }
         }
     };
@@ -161,9 +166,11 @@ public class DoSomethingActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             if (v == btnCameraDisable) {
-                restrictionPolicy.setCameraState(false);
+                // TODO (17) : Disable camera
+
             } else if (v == btnCameraEnable) {
-                restrictionPolicy.setCameraState(true);
+                // TODO (18) : Enable camera
+
             }
         }
     };
@@ -172,9 +179,11 @@ public class DoSomethingActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             if (v == btnHomeDisable) {
-                restrictionPolicy.setHomeKeyState(false);
+                // TODO (19) : Disable home key
+
             } else if (v == btnHomeEnable) {
-                restrictionPolicy.setHomeKeyState(true);
+                // TODO (20) : Enable home key
+
             }
         }
     };
@@ -183,9 +192,11 @@ public class DoSomethingActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             if (v == btnShareDisallow) {
-                restrictionPolicy.allowShareList(false);
+                // TODO (21) : Disable share list
+
             } else if (v == btnShareAllow) {
-                restrictionPolicy.allowShareList(true);
+                // TODO (22) : Enable share list
+
             }
         }
     };
@@ -194,9 +205,11 @@ public class DoSomethingActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             if (v == btnSettingsDisallow) {
-                restrictionPolicy.allowSettingsChanges(false);
+                // TODO (23) : Disallow settings changes
+
             } else if (v == btnSettingsAllow) {
-                restrictionPolicy.allowSettingsChanges(true);
+                // TODO (24) : Allow settings changes
+
             }
         }
     };

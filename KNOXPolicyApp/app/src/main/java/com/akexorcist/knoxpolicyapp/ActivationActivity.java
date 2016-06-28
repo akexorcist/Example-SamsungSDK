@@ -10,6 +10,7 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.akexorcist.knoxactivator.ActivationCallback;
 import com.akexorcist.knoxactivator.KnoxActivationManager;
 import com.akexorcist.knoxpolicyapp.manager.DialogManager;
+import com.akexorcist.knoxpolicyapp.manager.SharedPreferenceManager;
 import com.akexorcist.knoxpolicyapp.manager.ToastManager;
 
 public class ActivationActivity extends AppCompatActivity {

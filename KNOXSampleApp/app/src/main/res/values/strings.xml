@@ -15,4 +15,8 @@
     <string name="license_activation_success">KNOX license activation success</string>
     <string name="license_activation_loading_title">License Activating</string>
     <string name="license_activation_loading_content">Loading…</string>
+    <string name="button_1">Button 1</string>
+    <string name="button_2">Button 2</string>
+    <string name="button_3">Button 3</string>
+    <string name="button_4">Button 4</string>
 </resources>

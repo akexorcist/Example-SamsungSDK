@@ -15,11 +15,13 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-                <!-- //TODO Add category for multi window launcher -->
+                <!-- TODO (1) : Add category for multi window launcher -->
             </intent-filter>
         </activity>
 
-        <!-- //TODO Add meta data for multi window and multi instance support-->
+        <!-- TODO (2) : Add meta data for multi window support -->
+        <!-- TODO (3) : Add meta data for multi instance support -->
+
     </application>
 
 </manifest>

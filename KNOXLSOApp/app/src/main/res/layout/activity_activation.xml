@@ -7,7 +7,7 @@
     android:paddingLeft="@dimen/default_margin_padding_large"
     android:paddingRight="@dimen/default_margin_padding_large"
     android:paddingTop="@dimen/default_margin_padding_large"
-    tools:context="com.akexorcist.knoxlsoapp.MainActivity">
+    tools:context=".ActivationActivity">
 
     <TextView
         android:layout_width="match_parent"

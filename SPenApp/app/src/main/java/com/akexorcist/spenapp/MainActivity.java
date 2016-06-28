@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button btnSave;
     private ImageButton btnPenSetting;
 
-    // TODO Declare Spen, SpenNoteDoc, SpenPageDoc, SpenSimpleSurfaceView and SpenSettingPenLayout instance
+    // TODO (1) : Declare Spen, SpenNoteDoc, SpenPageDoc, SpenSimpleSurfaceView and SpenSettingPenLayout instance
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +26,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         bindView();
         setup();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        closeDrawingWorkspace();
     }
 
     private void bindView() {
@@ -51,17 +57,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        closeDrawingWorkspace();
-    }
-
-    private void closeDrawingWorkspace() {
-        // TODO Add close drawing workspace code. This method will called by onDestroy()
-
-    }
-
     private void setupDrawingWorkspace() {
         setupDrawingView();
         setupNoteDoc();
@@ -70,39 +65,48 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @SuppressWarnings("deprecation")
     private void setupDrawingView() {
-        // TODO Initialize SpenSimpleSurfaceView, then add into drawing workspace layout
+        // TODO (2) : Initialize SpenSimpleSurfaceView, then add into drawing workspace layout
 
     }
 
     @SuppressWarnings("deprecation")
     private void setupNoteDoc() {
-        // TODO Initialize SpenNoteDoc and create SpenPageDoc from SpenNoteDoc
+        // TODO (3) : Initialize SpenNoteDoc and create SpenPageDoc from SpenNoteDoc
 
     }
 
     private void setupPenSetting() {
-        // TODO Initialize SpenSettingPenLayout, then add into pen setting layout
-        // TODO Don't forget to set SpenSettingPenLayout canvas view with SpenSimpleSurfaceView
+        // TODO (4) : Initialize SpenSettingPenLayout, then add into pen setting layout
+        // TODO (5) : Don't forget to set SpenSettingPenLayout canvas view with SpenSimpleSurfaceView
+
+    }
+
+    private void closeDrawingWorkspace() {
+        // TODO (6) : Add close drawing workspace code. This method will called by onDestroy()
 
     }
 
     private void openPenSetting() {
-        // TODO Call SpenSettingPenLayout method to open pen setting layout
+        // TODO (7) : Call SpenSettingPenLayout method to open pen setting layout
 
     }
 
     private boolean setupSpen() {
-        // TODO Initialize Pen SDK and return boolean result
-
+        // TODO (8) : Initialize Pen SDK and return boolean result
         return false;
     }
 
     @Override
     public void onClick(View v) {
         if (v == btnSave) {
-            // TODO Capture bitmap from SimpleSurfaceView
+            captureDrawingBitmap();
         } else if (v == btnPenSetting) {
             openPenSetting();
         }
+    }
+
+    public void captureDrawingBitmap() {
+        // TODO (9) : Capture bitmap from SimpleSurfaceView (Extra : Save bitmap to external storage as .jpg file)
+
     }
 }

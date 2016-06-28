@@ -11,7 +11,7 @@ public class DoSomethingActivity extends AppCompatActivity implements View.OnCli
     private Button btnCreateGeofence;
     private Button btnClearGeofence;
 
-    // TODO Declare geofencing service
+    // TODO (1) : Declare geofencing service
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +38,7 @@ public class DoSomethingActivity extends AppCompatActivity implements View.OnCli
     }
 
     private void setupThing() {
-        // TODO Create geofencing service instance
+        // TODO (2) : Create geofencing service instance
 
     }
 
@@ -56,23 +56,23 @@ public class DoSomethingActivity extends AppCompatActivity implements View.OnCli
         }
     }
 
-    private void createGeofence() {
-        // TODO Create geofence, then add into geofencing service
-
-    }
-
-    private void clearGeofence() {
-        // TODO Clear all geofence in geofencing service
-
-    }
-
     private void startGeofencing() {
-        // TODO Start geofencing
+        // TODO (3) : Start geofencing
 
     }
 
     private void stopGeofencing() {
-        // TODO Stop geofencing
+        // TODO (4) : Stop geofencing
+
+    }
+
+    private void createGeofence() {
+        // TODO (5) : Create geofence, then add into geofencing service
+
+    }
+
+    private void clearGeofence() {
+        // TODO (6) : Clear all geofence in geofencing service
 
     }
 }

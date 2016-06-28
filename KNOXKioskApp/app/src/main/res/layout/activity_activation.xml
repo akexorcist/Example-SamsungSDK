@@ -7,6 +7,6 @@
     android:paddingLeft="@dimen/default_margin_padding_large"
     android:paddingRight="@dimen/default_margin_padding_large"
     android:paddingTop="@dimen/default_margin_padding_large"
-    tools:context="com.akexorcist.knoxkioskapp.MainActivity">
+    tools:context=".ActivationActivity">
 
 </RelativeLayout>

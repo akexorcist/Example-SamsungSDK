@@ -12,7 +12,7 @@ import com.akexorcist.knoxsampleapp.manager.DialogManager;
 import com.akexorcist.knoxsampleapp.manager.SharedPreferenceManager;
 import com.akexorcist.knoxsampleapp.manager.ToastManager;
 
-public class MainActivity extends AppCompatActivity implements ActivationCallback {
+public class ActivationActivity extends AppCompatActivity implements ActivationCallback {
     private final String LICENSE_KEY = "YOUR_KEY";
 
     private MaterialDialog dialogLoading;
@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity implements ActivationCallbac
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_activation);
         checkDeviceAdminActivation();
     }
 

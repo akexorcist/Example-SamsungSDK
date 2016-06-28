@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/default_margin_padding_large"
-        android:text="@string/lets_doa_something_with_knox_standard_sdk"
+        android:text="@string/lets_do_something_with_knox_standard_sdk"
         android:textSize="@dimen/default_text_size" />
 
 </RelativeLayout>

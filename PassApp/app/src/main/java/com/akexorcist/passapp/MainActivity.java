@@ -10,7 +10,7 @@ import android.widget.TextView;
 import com.samsung.android.sdk.pass.SpassFingerprint;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    // TODO Declare Spass and SpassFingerprint instance
+    // TODO (1) : Declare Spass and SpassFingerprint instance
 
     private TextView tvLoginDescription;
     private Button btnVerify;
@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private boolean setupSPass() {
-        // TODO Initialize Pass SDK and return boolean result
+        // TODO (2) : Initialize Pass SDK and return boolean result
 
         return false;
     }
@@ -50,36 +50,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         if (v == btnVerify) {
-            startIdentifyDialog(true);
+            startIdentifyDialog();
         }
     }
 
-    private void startIdentifyDialog(boolean backup) {
-        // TODO Start fingerprint scanning by with default identify dialog
+    private void startIdentifyDialog() {
+        // TODO (3) : Start fingerprint scanning by with default identify dialog
     }
 
     private SpassFingerprint.IdentifyListener mIdentifyListenerDialog = new SpassFingerprint.IdentifyListener() {
         @Override
         public void onFinished(int eventStatus) {
-            // Fingerprint scanning is finish
+            // TODO (4) : Check result from fingerprint scanning. If status is success, open next activity with openInfoActivity();
 
-            // TODO Check result from fingerprint scanning
-            // TODO if status is success, open next activity with openInfoActivity();
         }
 
         @Override
         public void onReady() {
-            // Fingerprint sensor is ready
         }
 
         @Override
         public void onStarted() {
-            // User touched fingerprint sensor
         }
 
         @Override
         public void onCompleted() {
-            // Identify is completed
         }
     };
 

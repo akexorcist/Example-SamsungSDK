@@ -15,11 +15,11 @@ public class GeofencingReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         String action = intent.getAction();
         if (action.equalsIgnoreCase(Geofencing.ACTION_DEVICE_INSIDE_GEOFENCE)) {
-            // TODO Do something when device inside geofence
+            // TODO (1) : Do something when device inside geofence
         } else if (action.equalsIgnoreCase(Geofencing.ACTION_DEVICE_OUTSIDE_GEOFENCE)) {
-            // TODO Do something when device outside geofence
+            // TODO (2) : Do something when device outside geofence
         } else if (action.equalsIgnoreCase(Geofencing.ACTION_DEVICE_LOCATION_UNAVAILABLE)) {
-            // TODO Do something when device location unavailable
+            // TODO (3) : Do something when device location unavailable
         }
     }
 

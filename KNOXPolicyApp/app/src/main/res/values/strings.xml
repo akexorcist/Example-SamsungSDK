@@ -13,4 +13,22 @@
     <string name="license_activation_success">KNOX license activation success</string>
     <string name="license_activation_loading_title">License Activating</string>
     <string name="license_activation_loading_content">Loading…</string>
+    <string name="prevent_facebook_app">Prevent Facebook App</string>
+    <string name="prevent">Prevent</string>
+    <string name="clear">Clear</string>
+    <string name="calculator_app_name">Calculator App Name</string>
+    <string name="change">Change</string>
+    <string name="enable_disable_youtube_app">Enable/Disable YouTube App</string>
+    <string name="disable">Disable</string>
+    <string name="enable">Enable</string>
+    <string name="enable_disable_google_drive">Enable/Disable Google Drive</string>
+    <string name="start_stop_gps">Start/Stop GPS</string>
+    <string name="start">Start</string>
+    <string name="stop">Stop</string>
+    <string name="enable_disable_camera">Enable/Disable Camera</string>
+    <string name="enable_disable_home_key">Enable/Disable Home Key</string>
+    <string name="allow_disallow_share_list">Allow/Disallow Share List</string>
+    <string name="disallow">Disallow</string>
+    <string name="allow">Allow</string>
+    <string name="allow_disallow_settings_changes">Allow/Disallow Settings Changes</string>
 </resources>

@@ -7,17 +7,17 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingBottom="@dimen/activity_vertical_margin"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/activity_vertical_margin">
+        android:paddingBottom="@dimen/default_margin_padding"
+        android:paddingLeft="@dimen/default_margin_padding"
+        android:paddingRight="@dimen/default_margin_padding"
+        android:paddingTop="@dimen/default_margin_padding">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Prevent Facebook App"
+            android:text="@string/prevent_facebook_app"
             android:textSize="18sp" />
 
         <LinearLayout
@@ -30,21 +30,25 @@
 
             <Button
                 android:id="@+id/btn_facebook_prevent"
+                style="@style/SimpleButton"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:text="Prevent" />
+                android:text="@string/prevent" />
 
             <Button
                 android:id="@+id/btn_facebook_clear"
+                style="@style/SimpleButton"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:text="Clear" />
+                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
+                android:text="@string/clear" />
         </LinearLayout>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Calculator App Name"
+            android:text="@string/calculator_app_name"
             android:textSize="18sp" />
 
         <LinearLayout
@@ -57,21 +61,25 @@
 
             <Button
                 android:id="@+id/btn_calculator_change"
+                style="@style/SimpleButton"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:text="Change" />
+                android:text="@string/change" />
 
             <Button
                 android:id="@+id/btn_calculator_clear"
+                style="@style/SimpleButton"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:text="Clear" />
+                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
+                android:text="@string/clear" />
         </LinearLayout>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Enable/Disable YouTube App"
+            android:text="@string/enable_disable_youtube_app"
             android:textSize="18sp" />
 
         <LinearLayout
@@ -84,21 +92,25 @@
 
             <Button
                 android:id="@+id/btn_youtube_disable"
+                style="@style/SimpleButton"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:text="Disable" />
+                android:text="@string/disable" />
 
             <Button
                 android:id="@+id/btn_youtube_enable"
+                style="@style/SimpleButton"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:text="Enable" />
+                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
+                android:text="@string/enable" />
         </LinearLayout>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Enable/Disable Google Drive"
+            android:text="@string/enable_disable_google_drive"
             android:textSize="18sp" />
 
         <LinearLayout
@@ -111,21 +123,25 @@
 
             <Button
                 android:id="@+id/btn_drive_disable"
+                style="@style/SimpleButton"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:text="Disable" />
+                android:text="@string/disable" />
 
             <Button
                 android:id="@+id/btn_drive_enable"
+                style="@style/SimpleButton"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:text="Enable" />
+                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
+                android:text="@string/enable" />
         </LinearLayout>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Start/Stop GPS"
+            android:text="@string/start_stop_gps"
             android:textSize="18sp" />
 
         <LinearLayout
@@ -138,21 +154,25 @@
 
             <Button
                 android:id="@+id/btn_gps_start"
+                style="@style/SimpleButton"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:text="Start" />
+                android:text="@string/start" />
 
             <Button
                 android:id="@+id/btn_gps_stop"
+                style="@style/SimpleButton"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:text="Stop" />
+                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
+                android:text="@string/stop" />
         </LinearLayout>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Enable/Disable Camera"
+            android:text="@string/enable_disable_camera"
             android:textSize="18sp" />
 
         <LinearLayout
@@ -165,21 +185,25 @@
 
             <Button
                 android:id="@+id/btn_camera_disable"
+                style="@style/SimpleButton"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:text="Disable" />
+                android:text="@string/disable" />
 
             <Button
                 android:id="@+id/btn_camera_enable"
+                style="@style/SimpleButton"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:text="Enable" />
+                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
+                android:text="@string/enable" />
         </LinearLayout>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Enable/Disable Home Key"
+            android:text="@string/enable_disable_home_key"
             android:textSize="18sp" />
 
         <LinearLayout
@@ -192,21 +216,25 @@
 
             <Button
                 android:id="@+id/btn_home_disable"
+                style="@style/SimpleButton"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:text="Disable" />
+                android:text="@string/disable" />
 
             <Button
                 android:id="@+id/btn_home_enable"
+                style="@style/SimpleButton"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:text="Enable" />
+                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
+                android:text="@string/enable" />
         </LinearLayout>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Allow/Disallow Share List"
+            android:text="@string/allow_disallow_share_list"
             android:textSize="18sp" />
 
         <LinearLayout
@@ -219,21 +247,25 @@
 
             <Button
                 android:id="@+id/btn_share_disallow"
+                style="@style/SimpleButton"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:text="Disallow" />
+                android:text="@string/disallow" />
 
             <Button
                 android:id="@+id/btn_share_allow"
+                style="@style/SimpleButton"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:text="Allow" />
+                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
+                android:text="@string/allow" />
         </LinearLayout>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Allow/Disallow Settings Changes"
+            android:text="@string/allow_disallow_settings_changes"
             android:textSize="18sp" />
 
         <LinearLayout
@@ -246,15 +278,19 @@
 
             <Button
                 android:id="@+id/btn_settings_disallow"
+                style="@style/SimpleButton"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:text="Disallow" />
+                android:text="@string/disallow" />
 
             <Button
                 android:id="@+id/btn_settings_allow"
+                style="@style/SimpleButton"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:text="Allow" />
+                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
+                android:text="@string/allow" />
         </LinearLayout>
     </LinearLayout>
 </ScrollView>

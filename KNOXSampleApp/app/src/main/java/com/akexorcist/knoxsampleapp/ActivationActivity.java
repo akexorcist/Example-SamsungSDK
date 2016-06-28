@@ -12,8 +12,8 @@ import com.akexorcist.knoxsampleapp.manager.DialogManager;
 import com.akexorcist.knoxsampleapp.manager.SharedPreferenceManager;
 import com.akexorcist.knoxsampleapp.manager.ToastManager;
 
-public class ActivationActivity extends AppCompatActivity implements ActivationCallback {
-    private final String LICENSE_KEY = "YOUR_KEY";
+public class ActivationActivity extends AppCompatActivity {
+    private final String LICENSE_KEY = "YOUR_ELM_KEY";
 
     private MaterialDialog dialogLoading;
 
@@ -21,63 +21,64 @@ public class ActivationActivity extends AppCompatActivity implements ActivationC
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_activation);
-        checkDeviceAdminActivation();
+        checkKnoxSdkSupported();
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        // TODO Register KnoxActivationManager
+        // TODO (1) : Register KnoxActivationManager with activationCallback
 
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        // TODO Unregister KnoxActivationManager
+        // TODO (2) : Unregister KnoxActivationManager
 
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        // TODO Call onActivityResult from KnoxActivationManager
+        // TODO (3) : Call onActivityResult from KnoxActivationManager
 
     }
 
-    @Override
-    public void onDeviceAdminActivated() {
-        showDeviceAdminActivationSuccess();
-        activateKnoxLicense();
-    }
+    private ActivationCallback activationCallback = new ActivationCallback() {
+        @Override
+        public void onDeviceAdminActivated() {
+            setDeviceAdminActivated();
+        }
 
-    @Override
-    public void onDeviceAdminActivationCancelled() {
-        showDeviceAdminActivationProblem();
-    }
+        @Override
+        public void onDeviceAdminActivationCancelled() {
+            showDeviceAdminActivationProblem();
+        }
 
-    @Override
-    public void onDeviceAdminDeactivated() {
-    }
+        @Override
+        public void onDeviceAdminDeactivated() {
 
-    @Override
-    public void onLicenseActivated() {
-        hideLoadingDialog();
-        saveLicenseActivationStateToSharedPreference();
-        showLicenseActivationSuccess();
-        goToRestrictionActivity();
-    }
+        }
 
-    @Override
-    public void onLicenseActivateFailed(int errorType, String errorMessage) {
-        hideLoadingDialog();
-        showLicenseActivationProblem(errorType, errorMessage);
-    }
+        @Override
+        public void onLicenseActivated() {
+            hideLoadingDialog();
+            saveLicenseActivationStateToSharedPreference();
+            showLicenseActivationSuccess();
+            goToRestrictionActivity();
+        }
 
-    private void checkDeviceAdminActivation() {
-        // TODO Check KNOX SDK support with KnoxActivationManager
-        // TODO If KNOX SDK is support for this device, then call activateDeviceAdmin
-        if (true) {
+        @Override
+        public void onLicenseActivateFailed(int errorType, String errorMessage) {
+            hideLoadingDialog();
+            showLicenseActivationProblem(errorType, errorMessage);
+        }
+    };
+
+    private void checkKnoxSdkSupported() {
+        // TODO (4) : Check KNOX SDK support with KnoxActivationManager. If supported, call activateDeviceAdmin()
+        if (false) {
             activateDeviceAdmin();
         } else {
             showDeviceUnsupportedProblem();
@@ -85,25 +86,28 @@ public class ActivationActivity extends AppCompatActivity implements ActivationC
     }
 
     private void activateDeviceAdmin() {
-        // TODO Check Device Admin is enable with KnoxActivationManager
-        // TODO If Device Admin isn't enable yet, then call activateDeviceAdmin from KnoxActivationManager
-        if (true) {
-            // TODO Call activateDeviceAdmin method from KnoxActivationManager
-
+        // TODO (5) : Check Device Admin is enable with KnoxActivationManager. If disabled, call activateDeviceAdmin()
+        if (false) {
+            setDeviceAdminActivated();
         } else {
-            onDeviceAdminActivated();
+            activateDeviceAdmin();
         }
     }
 
     private void activateKnoxLicense() {
-        if (!SharedPreferenceManager.isLicenseActivated(this)) {
-            showLoadingDialog();
-            // TODO Call activateLicense method from KnoxActivationManager for license activation
-
-        } else {
+        if (SharedPreferenceManager.isLicenseActivated(this)) {
             showLicenseActivationSuccess();
             goToRestrictionActivity();
+        } else {
+            showLoadingDialog();
+            // TODO (6) : Call activateLicense method from KnoxActivationManager for license activation
+
         }
+    }
+
+    private void setDeviceAdminActivated() {
+        showDeviceAdminActivationSuccess();
+        activateKnoxLicense();
     }
 
     private void saveLicenseActivationStateToSharedPreference() {

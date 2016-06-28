@@ -8,4 +8,9 @@
         <item name="colorAccent">@color/accent</item>
     </style>
 
+    <style name="SimpleButton">
+        <item name="android:background">@drawable/selector_round_button_accent</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
 </resources>

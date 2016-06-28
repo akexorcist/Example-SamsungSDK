@@ -13,8 +13,8 @@ import com.akexorcist.knoxgeofencingapp.manager.DialogManager;
 import com.akexorcist.knoxgeofencingapp.manager.SharedPreferenceManager;
 import com.akexorcist.knoxgeofencingapp.manager.ToastManager;
 
-public class ActivationActivity extends AppCompatActivity implements ActivationCallback {
-    private final String LICENSE_KEY = "YOUR_KEY";
+public class ActivationActivity extends AppCompatActivity {
+    private final String LICENSE_KEY = "YOUR_ELM_KEY";
 
     private MaterialDialog dialogLoading;
 
@@ -22,13 +22,13 @@ public class ActivationActivity extends AppCompatActivity implements ActivationC
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_activation);
-        checkDeviceAdminActivation();
+        checkKnoxSdkSupported();
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        KnoxActivationManager.getInstance().register(this);
+        KnoxActivationManager.getInstance().register(activationCallback);
     }
 
     @Override
@@ -43,36 +43,38 @@ public class ActivationActivity extends AppCompatActivity implements ActivationC
         KnoxActivationManager.getInstance().onActivityResult(requestCode, resultCode, data);
     }
 
-    @Override
-    public void onDeviceAdminActivated() {
-        showDeviceAdminActivationSuccess();
-        activateKnoxLicense();
-    }
+    private ActivationCallback activationCallback = new ActivationCallback() {
+        @Override
+        public void onDeviceAdminActivated() {
+            setDeviceAdminActivated();
+        }
 
-    @Override
-    public void onDeviceAdminActivationCancelled() {
-        showDeviceAdminActivationProblem();
-    }
+        @Override
+        public void onDeviceAdminActivationCancelled() {
+            showDeviceAdminActivationProblem();
+        }
 
-    @Override
-    public void onDeviceAdminDeactivated() {
-    }
+        @Override
+        public void onDeviceAdminDeactivated() {
 
-    @Override
-    public void onLicenseActivated() {
-        hideLoadingDialog();
-        saveLicenseActivationStateToSharedPreference();
-        showLicenseActivationSuccess();
-        goToRestrictionActivity();
-    }
+        }
 
-    @Override
-    public void onLicenseActivateFailed(int errorType, String errorMessage) {
-        hideLoadingDialog();
-        showLicenseActivationProblem(errorType, errorMessage);
-    }
+        @Override
+        public void onLicenseActivated() {
+            hideLoadingDialog();
+            saveLicenseActivationStateToSharedPreference();
+            showLicenseActivationSuccess();
+            goToRestrictionActivity();
+        }
 
-    private void checkDeviceAdminActivation() {
+        @Override
+        public void onLicenseActivateFailed(int errorType, String errorMessage) {
+            hideLoadingDialog();
+            showLicenseActivationProblem(errorType, errorMessage);
+        }
+    };
+
+    private void checkKnoxSdkSupported() {
         if (KnoxActivationManager.getInstance().isKnoxSdkSupported(this)) {
             activateDeviceAdmin();
         } else {
@@ -81,21 +83,26 @@ public class ActivationActivity extends AppCompatActivity implements ActivationC
     }
 
     private void activateDeviceAdmin() {
-        if (!KnoxActivationManager.getInstance().isDeviceAdminActivated(this)) {
-            KnoxActivationManager.getInstance().activateDeviceAdmin(this);
+        if (KnoxActivationManager.getInstance().isDeviceAdminActivated(this)) {
+            setDeviceAdminActivated();
         } else {
-            onDeviceAdminActivated();
+            KnoxActivationManager.getInstance().activateDeviceAdmin(this);
         }
     }
 
     private void activateKnoxLicense() {
-        if (!SharedPreferenceManager.isLicenseActivated(this)) {
-            showLoadingDialog();
-            KnoxActivationManager.getInstance().activateLicense(this, LICENSE_KEY);
-        } else {
+        if (SharedPreferenceManager.isLicenseActivated(this)) {
             showLicenseActivationSuccess();
             goToRestrictionActivity();
+        } else {
+            showLoadingDialog();
+            KnoxActivationManager.getInstance().activateLicense(this, LICENSE_KEY);
         }
+    }
+
+    private void setDeviceAdminActivated() {
+        showDeviceAdminActivationSuccess();
+        activateKnoxLicense();
     }
 
     private void saveLicenseActivationStateToSharedPreference() {

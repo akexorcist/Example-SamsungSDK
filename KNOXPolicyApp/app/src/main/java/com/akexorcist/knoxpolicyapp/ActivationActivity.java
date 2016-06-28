@@ -12,7 +12,7 @@ import com.akexorcist.knoxactivator.KnoxActivationManager;
 import com.akexorcist.knoxpolicyapp.manager.DialogManager;
 import com.akexorcist.knoxpolicyapp.manager.ToastManager;
 
-public class MainActivity extends AppCompatActivity implements ActivationCallback {
+public class ActivationActivity extends AppCompatActivity implements ActivationCallback {
     private String LICENSE_KEY = "YOUR_ELM_KEY";
 
     private MaterialDialog dialogLoading;
@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity implements ActivationCallbac
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_activation);
         checkDeviceAdminActivation();
     }
 

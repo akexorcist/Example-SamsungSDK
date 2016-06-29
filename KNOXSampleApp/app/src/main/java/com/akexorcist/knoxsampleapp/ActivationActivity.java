@@ -90,7 +90,7 @@ public class ActivationActivity extends AppCompatActivity {
         if (false) {
             setDeviceAdminActivated();
         } else {
-            activateDeviceAdmin();
+            // TODO (6) : Call activateDeviceAdmin method from KnoxActivationManager for device admin activation
         }
     }
 
@@ -100,7 +100,7 @@ public class ActivationActivity extends AppCompatActivity {
             goToRestrictionActivity();
         } else {
             showLoadingDialog();
-            // TODO (6) : Call activateLicense method from KnoxActivationManager for license activation
+            // TODO (7) : Call activateLicense method from KnoxActivationManager for license activation
 
         }
     }

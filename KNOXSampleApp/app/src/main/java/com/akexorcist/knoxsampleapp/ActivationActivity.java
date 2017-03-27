@@ -1,13 +1,12 @@
 package com.akexorcist.knoxsampleapp;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 
-import com.afollestad.materialdialogs.DialogAction;
-import com.afollestad.materialdialogs.MaterialDialog;
 import com.akexorcist.knoxactivator.ActivationCallback;
+import com.akexorcist.knoxactivator.KnoxActivationManager;
 import com.akexorcist.knoxsampleapp.manager.DialogManager;
 import com.akexorcist.knoxsampleapp.manager.SharedPreferenceManager;
 import com.akexorcist.knoxsampleapp.manager.ToastManager;
@@ -15,7 +14,7 @@ import com.akexorcist.knoxsampleapp.manager.ToastManager;
 public class ActivationActivity extends AppCompatActivity {
     private final String LICENSE_KEY = "YOUR_ELM_KEY";
 
-    private MaterialDialog dialogLoading;
+    private Dialog dialogLoading;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -28,21 +27,21 @@ public class ActivationActivity extends AppCompatActivity {
     public void onStart() {
         super.onStart();
         // TODO (1) : Register KnoxActivationManager with activationCallback
-
+        KnoxActivationManager.getInstance().register(activationCallback);
     }
 
     @Override
     public void onStop() {
         super.onStop();
         // TODO (2) : Unregister KnoxActivationManager
-
+        KnoxActivationManager.getInstance().unregister();
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         // TODO (3) : Call onActivityResult from KnoxActivationManager
-
+        KnoxActivationManager.getInstance().onActivityResult(requestCode, resultCode, data);
     }
 
     private ActivationCallback activationCallback = new ActivationCallback() {
@@ -78,7 +77,7 @@ public class ActivationActivity extends AppCompatActivity {
 
     private void checkKnoxSdkSupported() {
         // TODO (4) : Check KNOX SDK support with KnoxActivationManager. If supported, call activateDeviceAdmin()
-        if (false) {
+        if (KnoxActivationManager.getInstance().isKnoxSdkSupported(this)) {
             activateDeviceAdmin();
         } else {
             showDeviceUnsupportedProblem();
@@ -87,10 +86,11 @@ public class ActivationActivity extends AppCompatActivity {
 
     private void activateDeviceAdmin() {
         // TODO (5) : Check Device Admin is enable with KnoxActivationManager. If disabled, call activateDeviceAdmin()
-        if (false) {
+        if (KnoxActivationManager.getInstance().isDeviceAdminActivated(this)) {
             setDeviceAdminActivated();
         } else {
             // TODO (6) : Call activateDeviceAdmin method from KnoxActivationManager for device admin activation
+            KnoxActivationManager.getInstance().activateDeviceAdmin(this);
         }
     }
 
@@ -101,6 +101,7 @@ public class ActivationActivity extends AppCompatActivity {
         } else {
             showLoadingDialog();
             // TODO (7) : Call activateLicense method from KnoxActivationManager for license activation
+            KnoxActivationManager.getInstance().activateLicense(this, LICENSE_KEY);
 
         }
     }
@@ -128,36 +129,38 @@ public class ActivationActivity extends AppCompatActivity {
     }
 
     private void showDeviceUnsupportedProblem() {
-        DialogManager.showDeviceUnsupportedProblem(this, new MaterialDialog.SingleButtonCallback() {
+        DialogManager.showDeviceUnsupportedProblem(this, new DialogManager.OnDialogClickAdapter() {
             @Override
-            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+            public void onNeutralClick() {
                 finish();
             }
         });
     }
 
     private void showDeviceAdminActivationProblem() {
-        DialogManager.showDeviceAdminActivationProblem(this, new MaterialDialog.SingleButtonCallback() {
+        DialogManager.showDeviceAdminActivationProblem(this, new DialogManager.OnDialogClickAdapter() {
             @Override
-            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                if (which == DialogAction.POSITIVE) {
-                    activateDeviceAdmin();
-                } else if (which == DialogAction.NEGATIVE) {
-                    finish();
-                }
+            public void onPositiveClick() {
+                activateDeviceAdmin();
+            }
+
+            @Override
+            public void onNegativeClick() {
+                finish();
             }
         });
     }
 
     private void showLicenseActivationProblem(int errorType, String errorMessage) {
-        DialogManager.showLicenseActivationProblem(this, errorType, errorMessage, new MaterialDialog.SingleButtonCallback() {
+        DialogManager.showLicenseActivationProblem(this, errorType, errorMessage, new DialogManager.OnDialogClickAdapter() {
             @Override
-            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                if (which == DialogAction.POSITIVE) {
-                    activateKnoxLicense();
-                } else if (which == DialogAction.NEGATIVE) {
-                    finish();
-                }
+            public void onPositiveClick() {
+                activateKnoxLicense();
+            }
+
+            @Override
+            public void onNegativeClick() {
+                finish();
             }
         });
     }
